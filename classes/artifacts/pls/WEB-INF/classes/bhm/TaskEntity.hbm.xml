@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="top.macaulish.pls.dao.entity.TaskEntity" table="task" schema="pls">
+        <id name="id">
+            <column name="id" sql-type="int(11)"/>
+        </id>
+        <property name="guid">
+            <column name="guid" sql-type="char(36)" length="36"/>
+        </property>
+        <property name="taskname">
+            <column name="taskname" sql-type="varchar(50)" length="50"/>
+        </property>
+        <property name="state">
+            <column name="state" sql-type="varchar(10)" length="10"/>
+        </property>
+        <property name="targetModel">
+            <column name="target_model" sql-type="char(36)" length="36" not-null="true"/>
+        </property>
+        <property name="createTime">
+            <column name="create_time" sql-type="datetime" not-null="true"/>
+        </property>
+        <property name="creatorId">
+            <column name="creator_id" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="savePath">
+            <column name="save_path" sql-type="varchar(100)" length="100" not-null="true"/>
+        </property>
+        <property name="saveHost">
+            <column name="save_host" sql-type="varchar(100)" length="100" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>
