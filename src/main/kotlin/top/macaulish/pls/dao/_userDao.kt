@@ -1,6 +1,6 @@
 package top.macaulish.pls.dao
 
-import top.macaulish.pls.pojo.UserEntity
+import top.macaulish.pls.pojo.db.UserEntity
 
 
 interface _userDao{
@@ -15,7 +15,9 @@ interface _userDao{
 
     fun update(user: UserEntity):Boolean
 
-    fun queryFirstByExample(user: UserEntity):UserEntity?
+    fun queryFirstByExample(user: UserEntity): UserEntity?
 
     fun queryByExample(user: UserEntity):List<UserEntity>
+
+    fun queryFirst(userGuid: String): UserEntity?
 }

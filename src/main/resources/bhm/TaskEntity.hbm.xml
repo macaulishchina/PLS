@@ -4,7 +4,7 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="top.macaulish.pls.pojo.TaskEntity" table="task" schema="pls">
+    <class name="top.macaulish.pls.pojo.db.TaskEntity" table="task" schema="pls">
         <id name="id">
             <column name="id" sql-type="int(11)"/>
         </id>

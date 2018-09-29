@@ -4,7 +4,7 @@ import org.junit.Test
 import org.springframework.context.ApplicationContext
 import org.springframework.context.support.ClassPathXmlApplicationContext
 import top.macaulish.pls.dao.TaskDao
-import top.macaulish.pls.dao.entity.TaskEntity
+import top.macaulish.pls.pojo.db.TaskEntity
 
 
 class TestICE {

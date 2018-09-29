@@ -3,9 +3,8 @@ package top.macaulish.pls
 import com.google.gson.Gson
 import org.apache.log4j.Logger
 import org.junit.Test
-import top.macaulish.pls.dao.entity.UserEntity
-import java.util.*
-import kotlin.collections.ArrayList
+import top.macaulish.pls.kits.JsonConverter
+import top.macaulish.pls.pojo.json.ActionResultEntity
 
 class TestWhaterer {
 
@@ -18,21 +17,15 @@ class TestWhaterer {
 
     @Test
     fun testGson(){
-        val user = UserEntity()
-        user.username = "tom"
-        user.password = "123"
-        user.guid = UUID.randomUUID().toString()
-        val user2 = UserEntity()
-        user2.username = "tom2"
-        user2.password = "1232"
-        user2.guid = UUID.randomUUID().toString()
-        var users = ArrayList<UserEntity>()
-        users.add(user)
-        users.add(user2)
-        val j = JsonObject("success","tests").toJsonString()
-        val u = JsonObject("success",user).toJsonString()
-        val us = JsonObject("success",users).toJsonString()
-        print(us)
+        val action = "{\n" +
+                "            \"modelGuid\": \"5c64ee48-f81c-41ef-8c93-151aa745e88f\",\n" +
+                "            \"action\": \"create\",\n" +
+                "            \"result\": \"fail\",\n" +
+                "            \"reason\": \"reason if fail\"\n" +
+                "        }"
+        val gson = Gson()
+        val a = gson.fromJson(action, ActionResultEntity::class.java)
+        print(a)
 
     }
 

@@ -4,10 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.orm.hibernate5.HibernateTemplate
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
-import top.macaulish.pls.pojo.TaskEntity
+import top.macaulish.pls.pojo.db.TaskEntity
 
 @Component
 class TaskDao :_taskDao {
+
 
     @Autowired
     private lateinit var db: HibernateTemplate
@@ -79,5 +80,13 @@ class TaskDao :_taskDao {
     @Transactional(readOnly = true)
     override fun queryByExample(task: TaskEntity): List<TaskEntity> {
         return db.findByExample(task)
+    }
+
+    @Transactional(readOnly = true)
+    override fun queryFirst(taskGuid: String): TaskEntity? {
+        val ex = TaskEntity()
+        ex.guid = taskGuid
+        val tasks = db.findByExample(ex)
+        return if (tasks.isEmpty()) null else tasks[0]
     }
 }

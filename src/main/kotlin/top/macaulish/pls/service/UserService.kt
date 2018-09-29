@@ -3,7 +3,7 @@ package top.macaulish.pls.service
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import top.macaulish.pls.dao.UserDao
-import top.macaulish.pls.pojo.UserEntity
+import top.macaulish.pls.pojo.db.UserEntity
 
 @Service
 class UserService : _userService{

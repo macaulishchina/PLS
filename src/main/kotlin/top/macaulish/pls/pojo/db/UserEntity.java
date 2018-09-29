@@ -1,4 +1,4 @@
-package top.macaulish.pls.pojo;
+package top.macaulish.pls.pojo.db;
 
 import java.util.Objects;
 

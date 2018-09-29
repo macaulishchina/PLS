@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.orm.hibernate5.HibernateTemplate
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
-import top.macaulish.pls.pojo.UserEntity
+import top.macaulish.pls.pojo.db.UserEntity
 
 @Component
 class UserDao :_userDao {
@@ -72,12 +72,20 @@ class UserDao :_userDao {
 
     @Transactional(readOnly = true)
     override fun queryFirstByExample(user: UserEntity): UserEntity? {
-        val tasks = db.findByExample(user)
-        return if(tasks.isEmpty()) null else tasks[0]
+        val users = db.findByExample(user)
+        return if (users.isEmpty()) null else users[0]
     }
 
     @Transactional(readOnly = true)
     override fun queryByExample(user: UserEntity): List<UserEntity> {
         return db.findByExample(user)
+    }
+
+    @Transactional(readOnly = true)
+    override fun queryFirst(userGuid: String): UserEntity? {
+        val ex = UserEntity()
+        ex.guid = userGuid
+        val users = db.findByExample(ex)
+        return if (users.isEmpty()) null else users[0]
     }
 }

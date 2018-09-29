@@ -1,6 +1,6 @@
 package top.macaulish.pls.service
 
-import top.macaulish.pls.pojo.UserEntity
+import top.macaulish.pls.pojo.db.UserEntity
 
 
 interface _userService {

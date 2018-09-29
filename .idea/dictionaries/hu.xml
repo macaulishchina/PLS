@@ -1,7 +1,11 @@
 <component name="ProjectDictionaryState">
   <dictionary name="hu">
     <words>
+      <w>gson</w>
       <w>jstl</w>
+      <w>taskguid</w>
+      <w>taskstate</w>
+      <w>tasktype</w>
     </words>
   </dictionary>
 </component>
