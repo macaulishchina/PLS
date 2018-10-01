@@ -53,7 +53,7 @@
       <configuration>
         <datasource-map>
           <unit-entry name="configs:hibernate.cfg.xml" value="86c7771c-1e50-4ba2-a8ef-eb4be99d356d" />
-          <unit-entry name="sessionFactory" />
+          <unit-entry name="sessionFactory" value="99a5602e-ede1-4fa0-9e28-d98c63bbfb1f" />
         </datasource-map>
         <naming-strategy-map />
         <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/src/main/resources/configs/hibernate.cfg.xml" />
@@ -71,6 +71,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: com.jcraft:jsch:0.1.54" level="project" />
+    <orderEntry type="library" name="Maven: commons-net:commons-net:3.6" level="project" />
     <orderEntry type="library" name="Maven: org.json:json:20180813" level="project" />
     <orderEntry type="library" name="Maven: com.github.macaulishchina.salmon:coconut:0.00002" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: junit:junit:4.12" level="project" />

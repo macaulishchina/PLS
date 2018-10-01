@@ -1,17 +1,17 @@
 package top.macaulish.pls.service
 
-import top.macaulish.pls.pojo.json.ModelEntity
+import top.macaulish.pls.pojo.ice.ModelInfo
 
 
 interface _modelService : _iceInterface {
 
-    fun queryAllModels(): List<ModelEntity>
+    fun queryAllModels(): Array<ModelInfo>?
 
-    fun queryModel(modelGuid: String): ModelEntity?
+    fun queryModel(modelGuid: String): ModelInfo?
 
     fun startUpModel(modelGuid: String): Boolean
 
-    fun stutdownModel(modelGuid: String): Boolean
+    fun shutdownModel(modelGuid: String): Boolean
 
     fun restartUpModel(modelGuid: String): Boolean
 

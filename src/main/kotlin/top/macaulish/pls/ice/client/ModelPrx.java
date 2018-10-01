@@ -20,194 +20,198 @@
 
 package top.macaulish.pls.ice.client;
 
+import top.macaulish.pls.pojo.ice.ActionBack;
+import top.macaulish.pls.pojo.ice.ModelInfo;
+import top.macaulish.pls.pojo.ice.ModelsInfoHelper;
+
 public interface ModelPrx extends com.zeroc.Ice.ObjectPrx
 {
-    default String getAll()
+    default ModelInfo[] queryAll()
     {
-        return getAll(com.zeroc.Ice.ObjectPrx.noExplicitContext);
+        return queryAll(com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default String getAll(java.util.Map<String, String> context)
+    default ModelInfo[] queryAll(java.util.Map<String, String> context)
     {
-        return _iceI_getAllAsync(context, true).waitForResponse();
+        return _iceI_queryAllAsync(context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<String> getAllAsync()
+    default java.util.concurrent.CompletableFuture<ModelInfo[]> queryAllAsync()
     {
-        return _iceI_getAllAsync(com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
+        return _iceI_queryAllAsync(com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<String> getAllAsync(java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<ModelInfo[]> queryAllAsync(java.util.Map<String, String> context)
     {
-        return _iceI_getAllAsync(context, false);
+        return _iceI_queryAllAsync(context, false);
     }
 
-    default com.zeroc.IceInternal.OutgoingAsync<String> _iceI_getAllAsync(java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<ModelInfo[]> _iceI_queryAllAsync(java.util.Map<String, String> context, boolean sync)
     {
-        com.zeroc.IceInternal.OutgoingAsync<String> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "getAll", null, sync, null);
+        com.zeroc.IceInternal.OutgoingAsync<ModelInfo[]> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "queryAll", null, sync, null);
         f.invoke(true, context, null, null, istr -> {
-                     String ret;
-                     ret = istr.readString();
+            ModelInfo[] ret;
+            ret = ModelsInfoHelper.read(istr);
                      return ret;
                  });
         return f;
     }
 
-    default String getSpecific(String modelGuid)
+    default ModelInfo querySpecific(String modelGuid)
     {
-        return getSpecific(modelGuid, com.zeroc.Ice.ObjectPrx.noExplicitContext);
+        return querySpecific(modelGuid, com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default String getSpecific(String modelGuid, java.util.Map<String, String> context)
+    default ModelInfo querySpecific(String modelGuid, java.util.Map<String, String> context)
     {
-        return _iceI_getSpecificAsync(modelGuid, context, true).waitForResponse();
+        return _iceI_querySpecificAsync(modelGuid, context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<String> getSpecificAsync(String modelGuid)
+    default java.util.concurrent.CompletableFuture<ModelInfo> querySpecificAsync(String modelGuid)
     {
-        return _iceI_getSpecificAsync(modelGuid, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
+        return _iceI_querySpecificAsync(modelGuid, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<String> getSpecificAsync(String modelGuid, java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<ModelInfo> querySpecificAsync(String modelGuid, java.util.Map<String, String> context)
     {
-        return _iceI_getSpecificAsync(modelGuid, context, false);
+        return _iceI_querySpecificAsync(modelGuid, context, false);
     }
 
-    default com.zeroc.IceInternal.OutgoingAsync<String> _iceI_getSpecificAsync(String iceP_modelGuid, java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<ModelInfo> _iceI_querySpecificAsync(String iceP_modelGuid, java.util.Map<String, String> context, boolean sync)
     {
-        com.zeroc.IceInternal.OutgoingAsync<String> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "getSpecific", null, sync, null);
+        com.zeroc.IceInternal.OutgoingAsync<ModelInfo> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "querySpecific", null, sync, null);
         f.invoke(true, context, null, ostr -> {
                      ostr.writeString(iceP_modelGuid);
                  }, istr -> {
-                     String ret;
-                     ret = istr.readString();
+            ModelInfo ret;
+            ret = ModelInfo.ice_read(istr);
                      return ret;
                  });
         return f;
     }
 
-    default boolean startup(String modelGuid)
+    default ActionBack startup(String modelGuid)
     {
         return startup(modelGuid, com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default boolean startup(String modelGuid, java.util.Map<String, String> context)
+    default ActionBack startup(String modelGuid, java.util.Map<String, String> context)
     {
         return _iceI_startupAsync(modelGuid, context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<Boolean> startupAsync(String modelGuid)
+    default java.util.concurrent.CompletableFuture<ActionBack> startupAsync(String modelGuid)
     {
         return _iceI_startupAsync(modelGuid, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<Boolean> startupAsync(String modelGuid, java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<ActionBack> startupAsync(String modelGuid, java.util.Map<String, String> context)
     {
         return _iceI_startupAsync(modelGuid, context, false);
     }
 
-    default com.zeroc.IceInternal.OutgoingAsync<Boolean> _iceI_startupAsync(String iceP_modelGuid, java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<ActionBack> _iceI_startupAsync(String iceP_modelGuid, java.util.Map<String, String> context, boolean sync)
     {
-        com.zeroc.IceInternal.OutgoingAsync<Boolean> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "startup", null, sync, null);
+        com.zeroc.IceInternal.OutgoingAsync<ActionBack> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "startup", null, sync, null);
         f.invoke(true, context, null, ostr -> {
                      ostr.writeString(iceP_modelGuid);
                  }, istr -> {
-                     boolean ret;
-                     ret = istr.readBool();
+            ActionBack ret;
+            ret = ActionBack.ice_read(istr);
                      return ret;
                  });
         return f;
     }
 
-    default boolean shutdown(String modelGuid)
+    default ActionBack shutdown(String modelGuid)
     {
         return shutdown(modelGuid, com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default boolean shutdown(String modelGuid, java.util.Map<String, String> context)
+    default ActionBack shutdown(String modelGuid, java.util.Map<String, String> context)
     {
         return _iceI_shutdownAsync(modelGuid, context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<Boolean> shutdownAsync(String modelGuid)
+    default java.util.concurrent.CompletableFuture<ActionBack> shutdownAsync(String modelGuid)
     {
         return _iceI_shutdownAsync(modelGuid, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<Boolean> shutdownAsync(String modelGuid, java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<ActionBack> shutdownAsync(String modelGuid, java.util.Map<String, String> context)
     {
         return _iceI_shutdownAsync(modelGuid, context, false);
     }
 
-    default com.zeroc.IceInternal.OutgoingAsync<Boolean> _iceI_shutdownAsync(String iceP_modelGuid, java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<ActionBack> _iceI_shutdownAsync(String iceP_modelGuid, java.util.Map<String, String> context, boolean sync)
     {
-        com.zeroc.IceInternal.OutgoingAsync<Boolean> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "shutdown", null, sync, null);
+        com.zeroc.IceInternal.OutgoingAsync<ActionBack> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "shutdown", null, sync, null);
         f.invoke(true, context, null, ostr -> {
                      ostr.writeString(iceP_modelGuid);
                  }, istr -> {
-                     boolean ret;
-                     ret = istr.readBool();
+            ActionBack ret;
+            ret = ActionBack.ice_read(istr);
                      return ret;
                  });
         return f;
     }
 
-    default boolean reStartup(String modelGuid)
+    default ActionBack reStartup(String modelGuid)
     {
         return reStartup(modelGuid, com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default boolean reStartup(String modelGuid, java.util.Map<String, String> context)
+    default ActionBack reStartup(String modelGuid, java.util.Map<String, String> context)
     {
         return _iceI_reStartupAsync(modelGuid, context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<Boolean> reStartupAsync(String modelGuid)
+    default java.util.concurrent.CompletableFuture<ActionBack> reStartupAsync(String modelGuid)
     {
         return _iceI_reStartupAsync(modelGuid, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<Boolean> reStartupAsync(String modelGuid, java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<ActionBack> reStartupAsync(String modelGuid, java.util.Map<String, String> context)
     {
         return _iceI_reStartupAsync(modelGuid, context, false);
     }
 
-    default com.zeroc.IceInternal.OutgoingAsync<Boolean> _iceI_reStartupAsync(String iceP_modelGuid, java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<ActionBack> _iceI_reStartupAsync(String iceP_modelGuid, java.util.Map<String, String> context, boolean sync)
     {
-        com.zeroc.IceInternal.OutgoingAsync<Boolean> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "reStartup", null, sync, null);
+        com.zeroc.IceInternal.OutgoingAsync<ActionBack> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "reStartup", null, sync, null);
         f.invoke(true, context, null, ostr -> {
                      ostr.writeString(iceP_modelGuid);
                  }, istr -> {
-                     boolean ret;
-                     ret = istr.readBool();
+            ActionBack ret;
+            ret = ActionBack.ice_read(istr);
                      return ret;
                  });
         return f;
     }
 
-    default int consumeAbilicy(String modelGuid)
+    default int consumeAbility(String modelGuid)
     {
-        return consumeAbilicy(modelGuid, com.zeroc.Ice.ObjectPrx.noExplicitContext);
+        return consumeAbility(modelGuid, com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default int consumeAbilicy(String modelGuid, java.util.Map<String, String> context)
+    default int consumeAbility(String modelGuid, java.util.Map<String, String> context)
     {
-        return _iceI_consumeAbilicyAsync(modelGuid, context, true).waitForResponse();
+        return _iceI_consumeAbilityAsync(modelGuid, context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<Integer> consumeAbilicyAsync(String modelGuid)
+    default java.util.concurrent.CompletableFuture<Integer> consumeAbilityAsync(String modelGuid)
     {
-        return _iceI_consumeAbilicyAsync(modelGuid, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
+        return _iceI_consumeAbilityAsync(modelGuid, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<Integer> consumeAbilicyAsync(String modelGuid, java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<Integer> consumeAbilityAsync(String modelGuid, java.util.Map<String, String> context)
     {
-        return _iceI_consumeAbilicyAsync(modelGuid, context, false);
+        return _iceI_consumeAbilityAsync(modelGuid, context, false);
     }
 
-    default com.zeroc.IceInternal.OutgoingAsync<Integer> _iceI_consumeAbilicyAsync(String iceP_modelGuid, java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<Integer> _iceI_consumeAbilityAsync(String iceP_modelGuid, java.util.Map<String, String> context, boolean sync)
     {
-        com.zeroc.IceInternal.OutgoingAsync<Integer> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "consumeAbilicy", null, sync, null);
+        com.zeroc.IceInternal.OutgoingAsync<Integer> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "consumeAbility", null, sync, null);
         f.invoke(true, context, null, ostr -> {
                      ostr.writeString(iceP_modelGuid);
                  }, istr -> {

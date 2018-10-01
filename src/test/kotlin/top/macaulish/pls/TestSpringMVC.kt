@@ -1,5 +1,6 @@
 package top.macaulish.pls
 
+import org.junit.Before
 import org.junit.Test
 import org.springframework.context.ApplicationContext
 import org.springframework.context.support.ClassPathXmlApplicationContext
@@ -9,7 +10,7 @@ class TestSpringMVC {
 
     lateinit var context:ApplicationContext
 
-    @Test
+    @Before
     fun loadContext(){
         context = ClassPathXmlApplicationContext("classpath:/configs/spring-base.xml")
     }

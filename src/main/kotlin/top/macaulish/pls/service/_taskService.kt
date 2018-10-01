@@ -1,11 +1,11 @@
 package top.macaulish.pls.service
 
-import org.springframework.web.multipart.MultipartFile
-import top.macaulish.pls.pojo.json.FTPEntity
 import top.macaulish.pls.pojo.db.TaskEntity
-import top.macaulish.pls.pojo.json.TaskInfoEntity
-import top.macaulish.pls.pojo.json.TaskProcessEntity
+import top.macaulish.pls.pojo.ice.*
 import java.io.File
+import java.io.FileInputStream
+import java.io.InputStream
+import java.io.OutputStream
 
 interface _taskService : _iceInterface {
 
@@ -23,18 +23,17 @@ interface _taskService : _iceInterface {
 
     fun deleteTask(taskGuid: String): Boolean
 
-    fun queryTaskInfo(taskGuid: String): TaskInfoEntity?
+    fun queryTaskInfo(taskGuid: String): TaskInfo?
 
-    fun queryTaskProcess(taskGuid: String): TaskProcessEntity?
+    fun queryTaskProcess(taskGuid: String): TaskProcessInfo?
 
-    fun getUploadDir(taskGuid: String): String?
+    fun getUploadDir(taskGuid: String): PathInfo?
 
-    fun getDownloadDir(taskGuid: String): String?
+    fun getDownloadDir(taskGuid: String): PathInfo?
 
-    fun getFtpInfo(): FTPEntity?
+    fun getFtpInfo(): SFTPInfo?
 
-    fun uploadFile(file: MultipartFile, taskGuid: String): Boolean
+    fun uploadFile(inputStream: InputStream, taskGuid: String, saveName: String): Boolean
 
-    fun downloadFile(file: File, taskGuid: String): Boolean
-
+    fun downloadResult(taskGuid: String): ByteArray?
 }

@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName
 class TaskInfoEntity {
     var guid: String = ""
     @SerializedName(value = "taskType", alternate = ["tasktype", "type"])
-    var taskType: String = ""
     var state: String = ""
     @SerializedName(value = "modelGuid", alternate = ["model"])
     var modelGuid: String = ""

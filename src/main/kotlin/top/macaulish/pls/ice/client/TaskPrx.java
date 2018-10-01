@@ -20,330 +20,360 @@
 
 package top.macaulish.pls.ice.client;
 
+import top.macaulish.pls.pojo.ice.*;
+
 public interface TaskPrx extends com.zeroc.Ice.ObjectPrx
 {
-    default String create(String modelGuid, String taskGuid, String taskTpye)
+    default ActionBack create(String modelGuid, String taskGuid, String taskType)
     {
-        return create(modelGuid, taskGuid, taskTpye, com.zeroc.Ice.ObjectPrx.noExplicitContext);
+        return create(modelGuid, taskGuid, taskType, com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default String create(String modelGuid, String taskGuid, String taskTpye, java.util.Map<String, String> context)
+    default ActionBack create(String modelGuid, String taskGuid, String taskType, java.util.Map<String, String> context)
     {
-        return _iceI_createAsync(modelGuid, taskGuid, taskTpye, context, true).waitForResponse();
+        return _iceI_createAsync(modelGuid, taskGuid, taskType, context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<String> createAsync(String modelGuid, String taskGuid, String taskTpye)
+    default java.util.concurrent.CompletableFuture<ActionBack> createAsync(String modelGuid, String taskGuid, String taskType)
     {
-        return _iceI_createAsync(modelGuid, taskGuid, taskTpye, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
+        return _iceI_createAsync(modelGuid, taskGuid, taskType, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<String> createAsync(String modelGuid, String taskGuid, String taskTpye, java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<ActionBack> createAsync(String modelGuid, String taskGuid, String taskType, java.util.Map<String, String> context)
     {
-        return _iceI_createAsync(modelGuid, taskGuid, taskTpye, context, false);
+        return _iceI_createAsync(modelGuid, taskGuid, taskType, context, false);
     }
 
-    default com.zeroc.IceInternal.OutgoingAsync<String> _iceI_createAsync(String iceP_modelGuid, String iceP_taskGuid, String iceP_taskTpye, java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<ActionBack> _iceI_createAsync(String iceP_modelGuid, String iceP_taskGuid, String iceP_taskType, java.util.Map<String, String> context, boolean sync)
     {
-        com.zeroc.IceInternal.OutgoingAsync<String> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "create", null, sync, null);
+        com.zeroc.IceInternal.OutgoingAsync<ActionBack> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "create", null, sync, null);
         f.invoke(true, context, null, ostr -> {
                      ostr.writeString(iceP_modelGuid);
                      ostr.writeString(iceP_taskGuid);
-                     ostr.writeString(iceP_taskTpye);
+            ostr.writeString(iceP_taskType);
                  }, istr -> {
-                     String ret;
-                     ret = istr.readString();
+            ActionBack ret;
+            ret = ActionBack.ice_read(istr);
                      return ret;
                  });
         return f;
     }
 
-    default String start(String taskGuid)
+    default ActionBack start(String taskGuid)
     {
         return start(taskGuid, com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default String start(String taskGuid, java.util.Map<String, String> context)
+    default ActionBack start(String taskGuid, java.util.Map<String, String> context)
     {
         return _iceI_startAsync(taskGuid, context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<String> startAsync(String taskGuid)
+    default java.util.concurrent.CompletableFuture<ActionBack> startAsync(String taskGuid)
     {
         return _iceI_startAsync(taskGuid, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<String> startAsync(String taskGuid, java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<ActionBack> startAsync(String taskGuid, java.util.Map<String, String> context)
     {
         return _iceI_startAsync(taskGuid, context, false);
     }
 
-    default com.zeroc.IceInternal.OutgoingAsync<String> _iceI_startAsync(String iceP_taskGuid, java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<ActionBack> _iceI_startAsync(String iceP_taskGuid, java.util.Map<String, String> context, boolean sync)
     {
-        com.zeroc.IceInternal.OutgoingAsync<String> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "start", null, sync, null);
+        com.zeroc.IceInternal.OutgoingAsync<ActionBack> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "start", null, sync, null);
         f.invoke(true, context, null, ostr -> {
                      ostr.writeString(iceP_taskGuid);
                  }, istr -> {
-                     String ret;
-                     ret = istr.readString();
+            ActionBack ret;
+            ret = ActionBack.ice_read(istr);
                      return ret;
                  });
         return f;
     }
 
-    default String pause(String taskGuid)
+    default ActionBack pause(String taskGuid)
     {
         return pause(taskGuid, com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default String pause(String taskGuid, java.util.Map<String, String> context)
+    default ActionBack pause(String taskGuid, java.util.Map<String, String> context)
     {
         return _iceI_pauseAsync(taskGuid, context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<String> pauseAsync(String taskGuid)
+    default java.util.concurrent.CompletableFuture<ActionBack> pauseAsync(String taskGuid)
     {
         return _iceI_pauseAsync(taskGuid, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<String> pauseAsync(String taskGuid, java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<ActionBack> pauseAsync(String taskGuid, java.util.Map<String, String> context)
     {
         return _iceI_pauseAsync(taskGuid, context, false);
     }
 
-    default com.zeroc.IceInternal.OutgoingAsync<String> _iceI_pauseAsync(String iceP_taskGuid, java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<ActionBack> _iceI_pauseAsync(String iceP_taskGuid, java.util.Map<String, String> context, boolean sync)
     {
-        com.zeroc.IceInternal.OutgoingAsync<String> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "pause", null, sync, null);
+        com.zeroc.IceInternal.OutgoingAsync<ActionBack> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "pause", null, sync, null);
         f.invoke(true, context, null, ostr -> {
                      ostr.writeString(iceP_taskGuid);
                  }, istr -> {
-                     String ret;
-                     ret = istr.readString();
+            ActionBack ret;
+            ret = ActionBack.ice_read(istr);
                      return ret;
                  });
         return f;
     }
 
-    default String resume(String taskGuid)
+    default ActionBack resume(String taskGuid)
     {
         return resume(taskGuid, com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default String resume(String taskGuid, java.util.Map<String, String> context)
+    default ActionBack resume(String taskGuid, java.util.Map<String, String> context)
     {
         return _iceI_resumeAsync(taskGuid, context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<String> resumeAsync(String taskGuid)
+    default java.util.concurrent.CompletableFuture<ActionBack> resumeAsync(String taskGuid)
     {
         return _iceI_resumeAsync(taskGuid, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<String> resumeAsync(String taskGuid, java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<ActionBack> resumeAsync(String taskGuid, java.util.Map<String, String> context)
     {
         return _iceI_resumeAsync(taskGuid, context, false);
     }
 
-    default com.zeroc.IceInternal.OutgoingAsync<String> _iceI_resumeAsync(String iceP_taskGuid, java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<ActionBack> _iceI_resumeAsync(String iceP_taskGuid, java.util.Map<String, String> context, boolean sync)
     {
-        com.zeroc.IceInternal.OutgoingAsync<String> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "resume", null, sync, null);
+        com.zeroc.IceInternal.OutgoingAsync<ActionBack> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "resume", null, sync, null);
         f.invoke(true, context, null, ostr -> {
                      ostr.writeString(iceP_taskGuid);
                  }, istr -> {
-                     String ret;
-                     ret = istr.readString();
+            ActionBack ret;
+            ret = ActionBack.ice_read(istr);
                      return ret;
                  });
         return f;
     }
 
-    default String stop(String taskGuid)
+    default ActionBack stop(String taskGuid)
     {
         return stop(taskGuid, com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default String stop(String taskGuid, java.util.Map<String, String> context)
+    default ActionBack stop(String taskGuid, java.util.Map<String, String> context)
     {
         return _iceI_stopAsync(taskGuid, context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<String> stopAsync(String taskGuid)
+    default java.util.concurrent.CompletableFuture<ActionBack> stopAsync(String taskGuid)
     {
         return _iceI_stopAsync(taskGuid, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<String> stopAsync(String taskGuid, java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<ActionBack> stopAsync(String taskGuid, java.util.Map<String, String> context)
     {
         return _iceI_stopAsync(taskGuid, context, false);
     }
 
-    default com.zeroc.IceInternal.OutgoingAsync<String> _iceI_stopAsync(String iceP_taskGuid, java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<ActionBack> _iceI_stopAsync(String iceP_taskGuid, java.util.Map<String, String> context, boolean sync)
     {
-        com.zeroc.IceInternal.OutgoingAsync<String> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "stop", null, sync, null);
+        com.zeroc.IceInternal.OutgoingAsync<ActionBack> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "stop", null, sync, null);
         f.invoke(true, context, null, ostr -> {
                      ostr.writeString(iceP_taskGuid);
                  }, istr -> {
-                     String ret;
-                     ret = istr.readString();
+            ActionBack ret;
+            ret = ActionBack.ice_read(istr);
                      return ret;
                  });
         return f;
     }
 
-    default String delete(String taskGuid)
+    default ActionBack delete(String taskGuid)
     {
         return delete(taskGuid, com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default String delete(String taskGuid, java.util.Map<String, String> context)
+    default ActionBack delete(String taskGuid, java.util.Map<String, String> context)
     {
         return _iceI_deleteAsync(taskGuid, context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<String> deleteAsync(String taskGuid)
+    default java.util.concurrent.CompletableFuture<ActionBack> deleteAsync(String taskGuid)
     {
         return _iceI_deleteAsync(taskGuid, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<String> deleteAsync(String taskGuid, java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<ActionBack> deleteAsync(String taskGuid, java.util.Map<String, String> context)
     {
         return _iceI_deleteAsync(taskGuid, context, false);
     }
 
-    default com.zeroc.IceInternal.OutgoingAsync<String> _iceI_deleteAsync(String iceP_taskGuid, java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<ActionBack> _iceI_deleteAsync(String iceP_taskGuid, java.util.Map<String, String> context, boolean sync)
     {
-        com.zeroc.IceInternal.OutgoingAsync<String> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "delete", null, sync, null);
+        com.zeroc.IceInternal.OutgoingAsync<ActionBack> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "delete", null, sync, null);
         f.invoke(true, context, null, ostr -> {
                      ostr.writeString(iceP_taskGuid);
                  }, istr -> {
-                     String ret;
-                     ret = istr.readString();
+            ActionBack ret;
+            ret = ActionBack.ice_read(istr);
                      return ret;
                  });
         return f;
     }
 
-    default String query(String taskGuid)
+    default TaskInfo query(String taskGuid)
     {
         return query(taskGuid, com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default String query(String taskGuid, java.util.Map<String, String> context)
+    default TaskInfo query(String taskGuid, java.util.Map<String, String> context)
     {
         return _iceI_queryAsync(taskGuid, context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<String> queryAsync(String taskGuid)
+    default java.util.concurrent.CompletableFuture<TaskInfo> queryAsync(String taskGuid)
     {
         return _iceI_queryAsync(taskGuid, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<String> queryAsync(String taskGuid, java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<TaskInfo> queryAsync(String taskGuid, java.util.Map<String, String> context)
     {
         return _iceI_queryAsync(taskGuid, context, false);
     }
 
-    default com.zeroc.IceInternal.OutgoingAsync<String> _iceI_queryAsync(String iceP_taskGuid, java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<TaskInfo> _iceI_queryAsync(String iceP_taskGuid, java.util.Map<String, String> context, boolean sync)
     {
-        com.zeroc.IceInternal.OutgoingAsync<String> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "query", null, sync, null);
+        com.zeroc.IceInternal.OutgoingAsync<TaskInfo> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "query", null, sync, null);
         f.invoke(true, context, null, ostr -> {
                      ostr.writeString(iceP_taskGuid);
                  }, istr -> {
-                     String ret;
-                     ret = istr.readString();
+            TaskInfo ret;
+            ret = TaskInfo.ice_read(istr);
                      return ret;
                  });
         return f;
     }
 
-    default String getProgress(String taskGuid)
+    default TaskProcessInfo getProgress(String taskGuid)
     {
         return getProgress(taskGuid, com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default String getProgress(String taskGuid, java.util.Map<String, String> context)
+    default TaskProcessInfo getProgress(String taskGuid, java.util.Map<String, String> context)
     {
         return _iceI_getProgressAsync(taskGuid, context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<String> getProgressAsync(String taskGuid)
+    default java.util.concurrent.CompletableFuture<TaskProcessInfo> getProgressAsync(String taskGuid)
     {
         return _iceI_getProgressAsync(taskGuid, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<String> getProgressAsync(String taskGuid, java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<TaskProcessInfo> getProgressAsync(String taskGuid, java.util.Map<String, String> context)
     {
         return _iceI_getProgressAsync(taskGuid, context, false);
     }
 
-    default com.zeroc.IceInternal.OutgoingAsync<String> _iceI_getProgressAsync(String iceP_taskGuid, java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<TaskProcessInfo> _iceI_getProgressAsync(String iceP_taskGuid, java.util.Map<String, String> context, boolean sync)
     {
-        com.zeroc.IceInternal.OutgoingAsync<String> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "getProgress", null, sync, null);
+        com.zeroc.IceInternal.OutgoingAsync<TaskProcessInfo> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "getProgress", null, sync, null);
         f.invoke(true, context, null, ostr -> {
                      ostr.writeString(iceP_taskGuid);
                  }, istr -> {
-                     String ret;
-                     ret = istr.readString();
+            TaskProcessInfo ret;
+            ret = TaskProcessInfo.ice_read(istr);
                      return ret;
                  });
         return f;
     }
 
-    default String getUploadDir(String taskGuid)
+    default PathInfo getUploadDir(String taskGuid)
     {
         return getUploadDir(taskGuid, com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default String getUploadDir(String taskGuid, java.util.Map<String, String> context)
+    default PathInfo getUploadDir(String taskGuid, java.util.Map<String, String> context)
     {
         return _iceI_getUploadDirAsync(taskGuid, context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<String> getUploadDirAsync(String taskGuid)
+    default java.util.concurrent.CompletableFuture<PathInfo> getUploadDirAsync(String taskGuid)
     {
         return _iceI_getUploadDirAsync(taskGuid, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<String> getUploadDirAsync(String taskGuid, java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<PathInfo> getUploadDirAsync(String taskGuid, java.util.Map<String, String> context)
     {
         return _iceI_getUploadDirAsync(taskGuid, context, false);
     }
 
-    default com.zeroc.IceInternal.OutgoingAsync<String> _iceI_getUploadDirAsync(String iceP_taskGuid, java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<PathInfo> _iceI_getUploadDirAsync(String iceP_taskGuid, java.util.Map<String, String> context, boolean sync)
     {
-        com.zeroc.IceInternal.OutgoingAsync<String> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "getUploadDir", null, sync, null);
+        com.zeroc.IceInternal.OutgoingAsync<PathInfo> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "getUploadDir", null, sync, null);
         f.invoke(true, context, null, ostr -> {
                      ostr.writeString(iceP_taskGuid);
                  }, istr -> {
-                     String ret;
-                     ret = istr.readString();
+            PathInfo ret;
+            ret = PathInfo.ice_read(istr);
                      return ret;
                  });
         return f;
     }
 
-    default String getDownloadDir(String taskGuid)
+    default PathInfo getDownloadDir(String taskGuid)
     {
         return getDownloadDir(taskGuid, com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default String getDownloadDir(String taskGuid, java.util.Map<String, String> context)
+    default PathInfo getDownloadDir(String taskGuid, java.util.Map<String, String> context)
     {
         return _iceI_getDownloadDirAsync(taskGuid, context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<String> getDownloadDirAsync(String taskGuid)
+    default java.util.concurrent.CompletableFuture<PathInfo> getDownloadDirAsync(String taskGuid)
     {
         return _iceI_getDownloadDirAsync(taskGuid, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<String> getDownloadDirAsync(String taskGuid, java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<PathInfo> getDownloadDirAsync(String taskGuid, java.util.Map<String, String> context)
     {
         return _iceI_getDownloadDirAsync(taskGuid, context, false);
     }
 
-    default com.zeroc.IceInternal.OutgoingAsync<String> _iceI_getDownloadDirAsync(String iceP_taskGuid, java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<PathInfo> _iceI_getDownloadDirAsync(String iceP_taskGuid, java.util.Map<String, String> context, boolean sync) {
+        com.zeroc.IceInternal.OutgoingAsync<PathInfo> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "getDownloadDir", null, sync, null);
+        f.invoke(true, context, null, ostr -> {
+            ostr.writeString(iceP_taskGuid);
+        }, istr -> {
+            PathInfo ret;
+            ret = PathInfo.ice_read(istr);
+            return ret;
+        });
+        return f;
+    }
+
+    default String getDownloadResultZip(String taskGuid)
     {
-        com.zeroc.IceInternal.OutgoingAsync<String> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "getDownloadDir", null, sync, null);
+        return getDownloadResultZip(taskGuid, com.zeroc.Ice.ObjectPrx.noExplicitContext);
+    }
+
+    default String getDownloadResultZip(String taskGuid, java.util.Map<String, String> context) {
+        return _iceI_getDownloadResultZipAsync(taskGuid, context, true).waitForResponse();
+    }
+
+    default java.util.concurrent.CompletableFuture<String> getDownloadResultZipAsync(String taskGuid) {
+        return _iceI_getDownloadResultZipAsync(taskGuid, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
+    }
+
+    default java.util.concurrent.CompletableFuture<String> getDownloadResultZipAsync(String taskGuid, java.util.Map<String, String> context) {
+        return _iceI_getDownloadResultZipAsync(taskGuid, context, false);
+    }
+
+    default com.zeroc.IceInternal.OutgoingAsync<String> _iceI_getDownloadResultZipAsync(String iceP_taskGuid, java.util.Map<String, String> context, boolean sync) {
+        com.zeroc.IceInternal.OutgoingAsync<String> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "getDownloadResultZip", null, sync, null);
         f.invoke(true, context, null, ostr -> {
                      ostr.writeString(iceP_taskGuid);
                  }, istr -> {
@@ -354,32 +384,32 @@ public interface TaskPrx extends com.zeroc.Ice.ObjectPrx
         return f;
     }
 
-    default String getFTPInfo()
+    default SFTPInfo getFTPInfo()
     {
         return getFTPInfo(com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default String getFTPInfo(java.util.Map<String, String> context)
+    default SFTPInfo getFTPInfo(java.util.Map<String, String> context)
     {
         return _iceI_getFTPInfoAsync(context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<String> getFTPInfoAsync()
+    default java.util.concurrent.CompletableFuture<SFTPInfo> getFTPInfoAsync()
     {
         return _iceI_getFTPInfoAsync(com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<String> getFTPInfoAsync(java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<SFTPInfo> getFTPInfoAsync(java.util.Map<String, String> context)
     {
         return _iceI_getFTPInfoAsync(context, false);
     }
 
-    default com.zeroc.IceInternal.OutgoingAsync<String> _iceI_getFTPInfoAsync(java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<SFTPInfo> _iceI_getFTPInfoAsync(java.util.Map<String, String> context, boolean sync)
     {
-        com.zeroc.IceInternal.OutgoingAsync<String> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "getFTPInfo", null, sync, null);
+        com.zeroc.IceInternal.OutgoingAsync<SFTPInfo> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "getFTPInfo", null, sync, null);
         f.invoke(true, context, null, null, istr -> {
-                     String ret;
-                     ret = istr.readString();
+            SFTPInfo ret;
+            ret = SFTPInfo.ice_read(istr);
                      return ret;
                  });
         return f;
