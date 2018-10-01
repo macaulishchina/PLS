@@ -22,6 +22,14 @@
     <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="configLocations" value="classpath:configs/hibernate.cfg.xml"/>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.connection.url">
+                    jdbc:mysql://address=(protocol=tcp)(host=localhost)(port=3306)/pls
+                </prop>
+                <prop key="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</prop>
+            </props>
+        </property>
     </bean>
 
     <bean id="hibernateTemplate" class="org.springframework.orm.hibernate5.HibernateTemplate">

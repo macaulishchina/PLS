@@ -3,7 +3,7 @@ package top.macaulish.pls.service
 import top.macaulish.pls.pojo.ice.ModelInfo
 
 
-interface _modelService : _iceInterface {
+interface _ModelService : _IceInterface {
 
     fun queryAllModels(): Array<ModelInfo>?
 

@@ -19,6 +19,7 @@ class TestWhaterer {
     }
 
 
+
     @Test
     fun testLogger(){
         log.info("Hello world!")
@@ -65,4 +66,15 @@ class TestWhaterer {
             return Gson().toJson(this)
         }
     }
+
+    enum class Privilege(val n: Int) {
+        GUEST(0), USER(1), SUPERUSER(2), ADMIN(9)
+    }
+
+    @Test
+    fun testEnum() {
+        //print(Privilege.valueOf())
+
+    }
+
 }

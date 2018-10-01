@@ -37,6 +37,7 @@ CREATE TABLE IF NOT EXISTS `task` (
   `guid` char(36) NOT NULL,
   `task_name` varchar(50) NOT NULL,
   `task_type` varchar(20) NOT NULL,
+  `publish` int NOT NULL DEFAULT 0,
   `state` varchar(20) NOT NULL DEFAULT 'new',
   `model_guid` char(36) DEFAULT NULL,
   `model_name` varchar(50) DEFAULT NULL,

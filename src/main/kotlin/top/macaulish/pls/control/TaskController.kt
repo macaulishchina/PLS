@@ -13,7 +13,7 @@ import java.util.*
 
 
 @Controller
-@RequestMapping("/task")
+@RequestMapping(path = ["/{userGuid}/task"], produces = ["application/json;charset=UTF-8"])
 class TaskController {
 
     private val log = Logger.getLogger(TaskController::class.java)
@@ -23,62 +23,33 @@ class TaskController {
     @Autowired
     private lateinit var taskDao:TaskDao
 
-
-    @GetMapping(path=["/all"],produces = ["application/json;charset=UTF-8"])
+    @GetMapping(path = ["/all"])
     @ResponseBody
     fun getAllTasks():String{
         return try {
             val tasks = taskDao.queryByExample(TaskEntity())
             JsonResponse.success(tasks)
         }catch (e:Exception){
-            log.error("wrong",e)
+            log.error("fail to get all the task", e)
             JsonResponse.fail(e)
         }
     }
 
-    @PostMapping(path=["/create/{userId}/{modelGuid}"])
+    @PostMapping(path = ["/create"])
     @ResponseBody
-    fun createTask(@PathVariable userId: String, @PathVariable modelGuid: String, @RequestBody task: TaskEntity): String {
-//        try{
-//
-//            val taskPrx = taskService.getTaskServer()
-//            task.guid = UUID.randomUUID().toString()
-//            //通过ICE调用服务端创建任务服务并解析结果
-//            val createBack = taskPrx.create(modelGuid,task.guid,task.taskType)
-//            val jsonCreate = JSONObject(createBack)
-//            if(jsonCreate.getString("result") != "success"){
-//                throw Exception(jsonCreate.getString("reason"))
-//            }
-//            if(taskService.isLocalHost()){
-//                task.saveHost = "127.0.0.1"
-//            }else{
-//                val jsonFTP = JSONObject(taskPrx.ftpInfo)
-//                val host = jsonFTP.getString("host")
-//                task.saveHost = host
-//            }
-//            task.createTime = Timestamp(System.currentTimeMillis())
-////            task.creatorId = userId.toInt()
-//
-//        }catch (e:Exception){
-//            return ""
-//        }
+    fun createTask(@RequestBody task: TaskEntity): String {
 
-        return ""
+        return if (taskService.createTask(task)) {
+            JsonResponse.success("Created task ${task.taskName} successfully.")
+        } else {
+            JsonResponse.fail("Failed to create task ${task.taskName}.")
+        }
     }
 
+    @GetMapping(path = ["/query/{taskGuid}"])
+    @ResponseBody
+    fun queryTask(@PathVariable taskGuid: String) {
 
-    @GetMapping(path=["/pojo"])
-    fun testSpringMvc(): String {
-        val user = UserEntity()
-        user.username = "tom"
-        user.guid = UUID.randomUUID().toString()
-        return JsonResponse.success(user)
-    }
-
-
-    @GetMapping(path = ["/all.get"], produces = ["application/json;charset=UTF-8"])
-    private fun queryAllTasks():List<TaskEntity>{
-        TODO()
     }
 
 }

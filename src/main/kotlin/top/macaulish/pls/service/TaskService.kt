@@ -14,9 +14,10 @@ import java.io.*
 import java.net.InetAddress
 import java.sql.Timestamp
 import java.util.*
+import javax.annotation.PostConstruct
 
 @Service
-class TaskService : _taskService {
+class TaskService : _TaskService {
 
     private lateinit var taskServer: TaskPrx
 
@@ -31,18 +32,25 @@ class TaskService : _taskService {
 
     private lateinit var sftpKits: SFTPKits
 
-    init {
-        taskServer = taskClient.getTaskPrx()
-        if (!isLocal()) {
-            val sftp = taskServer.ftpInfo
-            sftpKits = SFTPKits(sftp.host, sftp.username, sftp.password, sftp.port)
-            log.info("sftp:$sftpKits")
+    @PostConstruct
+    fun initFunction() {
+        try {
+            taskServer = taskClient.getTaskPrx()
+            if (!isLocal()) {
+                val sftp = taskServer.ftpInfo
+                sftpKits = SFTPKits(sftp.host, sftp.username, sftp.password, sftp.port)
+                log.info("sftp:$sftpKits")
+            }
+        } catch (e: Exception) {
+            log.error("fail to init the task service", e)
         }
     }
 
     override fun createTask(task: TaskEntity): Boolean {
         try {
-            if (task.modelGuid == null || task.userGuid == null || task.taskName == null || task.taskType == null) throw Exception("任务创建缺少必要的信息！")
+            if (task.modelGuid == null || task.userGuid == null || task.taskName == null || task.taskType == null ||
+                    task.modelGuid.isBlank() || task.userGuid.isBlank() || task.taskName.isBlank() || task.taskType.isBlank())
+                throw Exception("任务创建缺少必要的信息！")
             val taskServer = taskClient.getTaskPrx()
             task.guid = UUID.randomUUID().toString()
             //服务端尝试创建任务

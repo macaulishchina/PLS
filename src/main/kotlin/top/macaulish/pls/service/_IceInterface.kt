@@ -1,5 +1,5 @@
 package top.macaulish.pls.service
 
-interface _iceInterface {
+interface _IceInterface {
 
 }

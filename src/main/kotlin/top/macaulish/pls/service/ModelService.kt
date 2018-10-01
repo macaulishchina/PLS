@@ -3,13 +3,13 @@ package top.macaulish.pls.service
 import org.apache.log4j.Logger
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import top.macaulish.pls.dao.TaskDao
 import top.macaulish.pls.ice.client.ModelICEClient
 import top.macaulish.pls.ice.client.ModelPrx
 import top.macaulish.pls.pojo.ice.ModelInfo
+import javax.annotation.PostConstruct
 
 @Service
-class ModelService : _modelService{
+class ModelService : _ModelService {
 
     private val log = Logger.getLogger(ModelService::class.java)
 
@@ -18,8 +18,13 @@ class ModelService : _modelService{
     @Autowired
     private lateinit var modelClient: ModelICEClient
 
-    init {
-        modelServer = modelClient.getModelPrx()
+    @PostConstruct
+    fun initFunction() {
+        try {
+            modelServer = modelClient.getModelPrx()
+        } catch (e: Exception) {
+            log.error("fail to init the model service", e)
+        }
     }
 
     override fun queryAllModels(): Array<ModelInfo>? {

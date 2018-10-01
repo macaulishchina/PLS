@@ -3,11 +3,16 @@ package top.macaulish.pls.pojo.db;
 import java.sql.Timestamp;
 import java.util.Objects;
 
+/**
+ * @author huyidong
+ * @date 2018/10/1
+ */
 public class TaskEntity {
     private int id;
     private String guid;
     private String taskName;
     private String taskType;
+    private int publish;
     private String state;
     private String modelGuid;
     private String modelName;
@@ -48,6 +53,14 @@ public class TaskEntity {
 
     public void setTaskType(String taskType) {
         this.taskType = taskType;
+    }
+
+    public int getPublish() {
+        return publish;
+    }
+
+    public void setPublish(int publish) {
+        this.publish = publish;
     }
 
     public String getState() {
@@ -128,6 +141,7 @@ public class TaskEntity {
         if (o == null || getClass() != o.getClass()) return false;
         TaskEntity that = (TaskEntity) o;
         return id == that.id &&
+                publish == that.publish &&
                 Objects.equals(guid, that.guid) &&
                 Objects.equals(taskName, that.taskName) &&
                 Objects.equals(taskType, that.taskType) &&
@@ -145,6 +159,6 @@ public class TaskEntity {
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, guid, taskName, taskType, state, modelGuid, modelName, userGuid, createTime, savePath, saveHost, taskSize, taskNumber);
+        return Objects.hash(id, guid, taskName, taskType, publish, state, modelGuid, modelName, userGuid, createTime, savePath, saveHost, taskSize, taskNumber);
     }
 }
