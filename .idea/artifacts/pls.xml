@@ -99,6 +99,10 @@
           <element id="library" level="project" name="Maven: commons-io:commons-io:2.5" />
           <element id="library" level="project" name="Maven: com.google.code.gson:gson:2.8.2" />
           <element id="library" level="project" name="Maven: com.zeroc:ice:3.7.1" />
+          <element id="library" level="project" name="Maven: com.github.macaulishchina.salmon:coconut:0.00002" />
+          <element id="library" level="project" name="Maven: com.jcraft:jsch:0.1.54" />
+          <element id="library" level="project" name="Maven: commons-net:commons-net:3.6" />
+          <element id="library" level="project" name="Maven: org.json:json:20180813" />
         </element>
       </element>
     </root>
