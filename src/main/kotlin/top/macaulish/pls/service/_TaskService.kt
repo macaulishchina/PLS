@@ -1,7 +1,8 @@
-package top.macaulish.pls.service._interface
+package top.macaulish.pls.service
 
 import top.macaulish.pls.pojo.db.TaskEntity
 import top.macaulish.pls.pojo.ice.*
+import top.macaulish.pls.service._IceInterface
 import java.io.InputStream
 
 interface _TaskService : _IceInterface {

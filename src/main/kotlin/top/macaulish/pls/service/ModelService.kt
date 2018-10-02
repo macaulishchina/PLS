@@ -3,9 +3,8 @@ package top.macaulish.pls.service
 import org.apache.log4j.Logger
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import top.macaulish.pls.ice.client.ModelICEClient
+import top.macaulish.pls.service.ice.client.ModelICEClient
 import top.macaulish.pls.pojo.ice.ModelInfo
-import top.macaulish.pls.service._interface._ModelService
 
 @Service
 class ModelService : _ModelService {
@@ -14,7 +13,7 @@ class ModelService : _ModelService {
 
     @Autowired
     private lateinit var modelClient: ModelICEClient
-    
+
     override fun queryAllModels(): Array<ModelInfo>? {
         return try {
             modelClient.getModelPrx().queryAll()

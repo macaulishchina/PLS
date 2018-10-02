@@ -1,10 +1,9 @@
-package top.macaulish.pls.ice.client
+package top.macaulish.pls.service.ice.client
 
 import com.zeroc.Ice.Util
 import org.apache.log4j.Logger
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
-import top.macaulish.pls.service.ice.client.TaskPrx
 
 @Component
 class TaskICEClient {

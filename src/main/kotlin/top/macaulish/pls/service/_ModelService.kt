@@ -1,6 +1,7 @@
-package top.macaulish.pls.service._interface
+package top.macaulish.pls.service
 
 import top.macaulish.pls.pojo.ice.ModelInfo
+import top.macaulish.pls.service._IceInterface
 
 
 interface _ModelService : _IceInterface {

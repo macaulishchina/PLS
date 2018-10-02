@@ -3,7 +3,6 @@ package top.macaulish.pls.kits
 import com.jcraft.jsch.*
 import org.apache.commons.io.IOUtils
 import org.apache.log4j.Logger
-import top.macaulish.pls.kits._interface._SFTPKits
 import java.io.*
 import java.util.*
 
@@ -158,7 +157,7 @@ class SFTPKits(private val username: String, private val host: String, private v
     }
 
     override fun existAbsolutelyFile(absolutePath: String): Boolean {
-        var exist = false
+        val exist: Boolean
         val currentDir: String = pwd()
 
         val last = absolutePath.lastIndexOfAny(charArrayOf('\\', '/'))
@@ -250,9 +249,10 @@ class SFTPKits(private val username: String, private val host: String, private v
             if (!existFile(saveFile)) {
                 log.debug("upload file $saveFile failed")
                 false
+            } else {
+                log.debug("upload file $saveFile to $dir/$saveFile successfully")
+                true
             }
-            log.debug("upload file $saveFile to $dir/$saveFile successfully")
-            true
         } catch (e: SftpException) {
             log.error("fail to upload file $saveFile", e)
             false
@@ -272,9 +272,10 @@ class SFTPKits(private val username: String, private val host: String, private v
             if (!existFile(saveFile)) {
                 log.debug("upload file $saveFile failed")
                 false
+            } else {
+                log.debug("upload file $saveFile to $dir/$saveFile successfully")
+                true
             }
-            log.debug("upload file $saveFile to $dir/$saveFile successfully")
-            true
         } catch (e: SftpException) {
             log.error("fail to upload file $saveFile", e)
             false
@@ -292,8 +293,10 @@ class SFTPKits(private val username: String, private val host: String, private v
             if (!File(localSave).exists()) {
                 log.debug("download file failed")
                 false
+            } else {
+                log.debug("upload file $saveName to $dir/$saveName successfully")
+                true
             }
-            true
         } catch (e: Exception) {
             log.error("fail to download file from $dir/$file", e)
             false

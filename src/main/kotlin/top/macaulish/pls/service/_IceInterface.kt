@@ -1,4 +1,4 @@
-package top.macaulish.pls.service._interface
+package top.macaulish.pls.service
 
 interface _IceInterface {
 

@@ -103,6 +103,14 @@
           <element id="library" level="project" name="Maven: com.jcraft:jsch:0.1.54" />
           <element id="library" level="project" name="Maven: commons-net:commons-net:3.6" />
           <element id="library" level="project" name="Maven: org.json:json:20180813" />
+          <element id="library" level="project" name="Maven: bouncycastle:bcmail-jdk14:138" />
+          <element id="library" level="project" name="Maven: bouncycastle:bcprov-jdk14:138" />
+          <element id="library" level="project" name="Maven: com.lowagie:itext:2.1.7" />
+          <element id="library" level="project" name="Maven: org.bouncycastle:bcmail-jdk14:1.38" />
+          <element id="library" level="project" name="Maven: org.bouncycastle:bcprov-jdk14:1.38" />
+          <element id="library" level="project" name="Maven: org.bouncycastle:bctsp-jdk14:1.38" />
+          <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-starter-cache:1.5.9.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-context-support:5.0.9.RELEASE" />
         </element>
       </element>
     </root>

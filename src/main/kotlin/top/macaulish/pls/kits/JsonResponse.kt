@@ -12,7 +12,7 @@ object JsonResponse {
         return JsonResult("fail",reason).toJsonString()
     }
 
-    private class JsonResult(val state:String,var data:Any){
+    private class JsonResult(val state: String, val data: Any) {
         fun toJsonString():String{
             return Gson().toJson(this)
         }

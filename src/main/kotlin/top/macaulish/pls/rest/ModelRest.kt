@@ -1,4 +1,4 @@
-package top.macaulish.pls.control
+package top.macaulish.pls.rest
 
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController

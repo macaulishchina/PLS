@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import top.macaulish.pls.dao.UserDao
 import top.macaulish.pls.pojo.db.UserEntity
-import top.macaulish.pls.service._interface._UserService
 
 @Service
 class UserService : _UserService {

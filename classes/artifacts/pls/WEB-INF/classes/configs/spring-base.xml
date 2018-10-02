@@ -5,7 +5,6 @@
        xmlns:aop="http://www.springframework.org/schema/aop" xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
-    <context:component-scan base-package="top.macaulish.**.*"/>
     <context:annotation-config/>
 
     <util:properties id="db" location="classpath:configs/db.properties"/>
@@ -22,6 +21,14 @@
     <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="configLocations" value="classpath:configs/hibernate.cfg.xml"/>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.connection.url">
+                    jdbc:mysql://address=(protocol=tcp)(host=localhost)(port=3306)/pls
+                </prop>
+                <prop key="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</prop>
+            </props>
+        </property>
     </bean>
 
     <bean id="hibernateTemplate" class="org.springframework.orm.hibernate5.HibernateTemplate">

@@ -4,12 +4,11 @@ import org.apache.log4j.Logger
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import top.macaulish.pls.dao.TaskDao
-import top.macaulish.pls.ice.client.TaskICEClient
+import top.macaulish.pls.service.ice.client.TaskICEClient
 import top.macaulish.pls.kits.FileKits
 import top.macaulish.pls.kits.SFTPKits
 import top.macaulish.pls.pojo.db.TaskEntity
 import top.macaulish.pls.pojo.ice.*
-import top.macaulish.pls.service._interface._TaskService
 import java.io.*
 import java.net.InetAddress
 import java.sql.Timestamp

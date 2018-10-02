@@ -1,4 +1,4 @@
-package top.macaulish.pls.control
+package top.macaulish.pls.rest
 
 import org.apache.log4j.Logger
 import org.springframework.beans.factory.annotation.Autowired

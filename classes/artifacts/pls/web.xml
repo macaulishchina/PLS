@@ -20,29 +20,4 @@
         <servlet-name>default</servlet-name>
         <url-pattern>/static/*</url-pattern>
     </servlet-mapping>
-
-    <servlet-mapping>
-        <servlet-name>default</servlet-name>
-        <url-pattern>/index.index</url-pattern>
-    </servlet-mapping>
-
-    <servlet-mapping>
-        <servlet-name>mvc-dispatcher</servlet-name>
-        <url-pattern>/</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>mvc-dispatcher</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <init-param>
-            <param-name>contextConfigLocation</param-name>
-            <param-value>classpath:/configs/spring-*.xml</param-value>
-        </init-param>
-    </servlet>
-
-    <welcome-file-list>
-
-        <welcome-file>index.jsp</welcome-file>
-
-    </welcome-file-list>
 </web-app>
