@@ -1,4 +1,4 @@
-package top.macaulish.pls.service
+package top.macaulish.pls.service._interface
 
 import top.macaulish.pls.pojo.db.UserEntity
 

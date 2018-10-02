@@ -18,7 +18,7 @@
 // </auto-generated>
 //
 
-package top.macaulish.pls.ice.client;
+package top.macaulish.pls.service.ice.client;
 
 public class _ModelPrxI extends com.zeroc.Ice._ObjectPrxI implements ModelPrx
 {

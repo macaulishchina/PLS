@@ -1,12 +1,11 @@
 package top.macaulish.pls.kits
 
 import com.jcraft.jsch.*
-import com.zeroc.IceInternal.Ex
 import org.apache.commons.io.IOUtils
 import org.apache.log4j.Logger
+import top.macaulish.pls.kits._interface._SFTPKits
 import java.io.*
 import java.util.*
-import kotlin.math.abs
 
 /**
  *@author huyidong
@@ -26,7 +25,7 @@ class SFTPKits(private val username: String, private val host: String, private v
         this.privateKey = privateKey
     }
 
-    constructor(host: String, username: String, password: String, port: Int) : this(username, host, port) {
+    constructor(host: String, username: String, password: String, port: Int = 22) : this(username, host, port) {
         this.password = password
     }
 

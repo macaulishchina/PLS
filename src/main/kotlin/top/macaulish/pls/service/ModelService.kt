@@ -4,32 +4,20 @@ import org.apache.log4j.Logger
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import top.macaulish.pls.ice.client.ModelICEClient
-import top.macaulish.pls.ice.client.ModelPrx
 import top.macaulish.pls.pojo.ice.ModelInfo
-import javax.annotation.PostConstruct
+import top.macaulish.pls.service._interface._ModelService
 
 @Service
 class ModelService : _ModelService {
 
     private val log = Logger.getLogger(ModelService::class.java)
 
-    private lateinit var modelServer: ModelPrx
-
     @Autowired
     private lateinit var modelClient: ModelICEClient
-
-    @PostConstruct
-    fun initFunction() {
-        try {
-            modelServer = modelClient.getModelPrx()
-        } catch (e: Exception) {
-            log.error("fail to init the model service", e)
-        }
-    }
-
+    
     override fun queryAllModels(): Array<ModelInfo>? {
         return try {
-            modelServer.queryAll()
+            modelClient.getModelPrx().queryAll()
         } catch (e: Exception) {
             e.printStackTrace()
             log.error("查询模型信息失败！", e)
@@ -39,7 +27,7 @@ class ModelService : _ModelService {
 
     override fun queryModel(modelGuid: String): ModelInfo? {
         return try {
-            modelServer.querySpecific(modelGuid)
+            modelClient.getModelPrx().querySpecific(modelGuid)
         } catch (e: Exception) {
             e.printStackTrace()
             log.error("查询模型信息失败！Guid=$modelGuid", e)
@@ -50,7 +38,7 @@ class ModelService : _ModelService {
     override fun startUpModel(modelGuid: String): Boolean {
         return try {
             //服务端尝试启动模型
-            val actionBack = modelServer.startup(modelGuid)
+            val actionBack = modelClient.getModelPrx().startup(modelGuid)
             if (!actionBack.isSuccessBack) throw Exception("服务端模型启动失败！${actionBack.reason}")
             true
         } catch (e: Exception) {
@@ -63,7 +51,7 @@ class ModelService : _ModelService {
     override fun shutdownModel(modelGuid: String): Boolean {
         return try {
             //服务端尝试关闭模型
-            val actionBack = modelServer.shutdown(modelGuid)
+            val actionBack = modelClient.getModelPrx().shutdown(modelGuid)
             if (!actionBack.isSuccessBack) throw Exception("服务端关闭模型失败！${actionBack.reason}")
             true
         } catch (e: Exception) {
@@ -76,7 +64,7 @@ class ModelService : _ModelService {
     override fun restartUpModel(modelGuid: String): Boolean {
         return try {
             //服务端尝试重启模型
-            val actionBack = modelServer.reStartup(modelGuid)
+            val actionBack = modelClient.getModelPrx().reStartup(modelGuid)
             if (!actionBack.isSuccessBack) throw Exception("服务端重启模型失败！${actionBack.reason}")
             true
         } catch (e: Exception) {
@@ -88,7 +76,7 @@ class ModelService : _ModelService {
 
     override fun queryConsumeAbility(modelGuid: String): Int {
         return try {
-            modelServer.consumeAbility(modelGuid)
+            modelClient.getModelPrx().consumeAbility(modelGuid)
         } catch (e: Exception) {
             e.printStackTrace()
             log.error("查询可用资源失败！", e)

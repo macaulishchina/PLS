@@ -18,7 +18,7 @@
 // </auto-generated>
 //
 
-package top.macaulish.pls.ice.client;
+package top.macaulish.pls.service.ice.client;
 
 import top.macaulish.pls.pojo.ice.*;
 

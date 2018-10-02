@@ -1,6 +1,7 @@
 package top.macaulish.pls
 
 import com.macaulish.top.coconut.util.DateKits
+import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import top.macaulish.pls.kits.SFTPKits
@@ -20,7 +21,7 @@ class TestSFTPKits {
 
     @Before
     fun testLogin() {
-        ftp = SFTPKits(host, username, password, port)
+        ftp = SFTPKits(host, username, password)
         print(ftp)
         ftp.login()
     }
@@ -70,5 +71,10 @@ class TestSFTPKits {
         println(ftp.pwd())
         ftp.cd("..")
         println(ftp.pwd())
+    }
+
+    @After
+    fun logout() {
+        ftp.logout()
     }
 }
