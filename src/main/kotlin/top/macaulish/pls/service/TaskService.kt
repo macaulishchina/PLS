@@ -41,8 +41,8 @@ class TaskService : _TaskService {
             task.createTime = Timestamp(System.currentTimeMillis())
             task.state = "ready"
             task.modelName = modelService.queryModel(task.modelGuid)?.name ?: "unknown model name"
-            task.savePath = getUploadDir(task.guid)?.path ?: "Not available"
-            task.saveHost = getFtpInfo()?.host ?: "Not available"
+            task.savePath = getUploadDir(task.guid)?.path ?: "not available"
+            task.saveHost = getFtpInfo()?.host ?: "not available"
             task.taskSize = 0
             task.taskNumber = 0
             //保存任务到数据库

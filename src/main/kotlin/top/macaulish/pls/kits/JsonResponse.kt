@@ -4,12 +4,12 @@ import com.google.gson.Gson
 
 object JsonResponse {
 
-    fun success(result:Any):String{
-        return JsonResult("success",result).toJsonString()
+    fun success(result: Any?): String {
+        return JsonResult("success", result ?: "").toJsonString()
     }
 
-    fun fail(reason:Any):String{
-        return JsonResult("fail",reason).toJsonString()
+    fun fail(reason: Any?): String {
+        return JsonResult("fail", reason ?: "").toJsonString()
     }
 
     private class JsonResult(val state: String, val data: Any) {

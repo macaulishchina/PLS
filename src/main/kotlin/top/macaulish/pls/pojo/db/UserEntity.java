@@ -2,6 +2,10 @@ package top.macaulish.pls.pojo.db;
 
 import java.util.Objects;
 
+/**
+ * @author huyidong
+ * @date 2018/10/3
+ */
 public class UserEntity {
     private int id;
     private String guid;

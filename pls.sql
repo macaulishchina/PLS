@@ -59,10 +59,10 @@ CREATE TABLE IF NOT EXISTS `task` (
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `guid` char(36) NOT NULL,
-  `username` varchar(20) NOT NULL,
-  `password` varchar(20) NOT NULL,
+  `id`        int(11)            NOT NULL AUTO_INCREMENT,
+  `guid`      char(36)           NOT NULL,
+  `username`  VARCHAR(20) UNIQUE NOT NULL,
+  `password`  varchar(20)        NOT NULL,
   `privilege` int(11) DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `guid` (`guid`)

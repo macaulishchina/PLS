@@ -38,7 +38,6 @@ class SpringMVCConfig : WebMvcConfigurationSupport() {
     override fun configureContentNegotiation(configurer: ContentNegotiationConfigurer) {
         configurer.ignoreAcceptHeader(true)
                 .defaultContentType(MediaType.TEXT_HTML)
-
     }
 
     /*

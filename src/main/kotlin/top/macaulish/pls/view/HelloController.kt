@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.ResponseBody
+import top.macaulish.pls.kits.JsonResponse
 
 /**
  *@author huyidong
@@ -32,10 +33,10 @@ class HelloController {
         return "{      \"name\":\"tom\",      \"weight\":\"12.3kg\"      } "
     }
 
-    @PostMapping(path = ["/dog"], consumes = ["application/json;charset=UTF-8"])
+    @PostMapping(path = ["/dog"], consumes = ["application/json;charset=UTF-8"], produces = ["application/json;charset=UTF-8"])
     @ResponseBody
     fun helloDogPost(@RequestBody d: Dog): String {
-        return d.toString()
+        return JsonResponse.success(d.toString())
     }
 
     class Dog {
