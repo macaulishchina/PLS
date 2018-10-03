@@ -14,13 +14,12 @@ class ModelService : _ModelService {
     @Autowired
     private lateinit var modelClient: ModelICEClient
 
-    override fun queryAllModels(): Array<ModelInfo>? {
+    override fun queryAllModels(): Array<ModelInfo> {
         return try {
             modelClient.getModelPrx().queryAll()
         } catch (e: Exception) {
-            e.printStackTrace()
             log.error("查询模型信息失败！", e)
-            null
+            emptyArray()
         }
     }
 
@@ -28,7 +27,6 @@ class ModelService : _ModelService {
         return try {
             modelClient.getModelPrx().querySpecific(modelGuid)
         } catch (e: Exception) {
-            e.printStackTrace()
             log.error("查询模型信息失败！Guid=$modelGuid", e)
             null
         }
@@ -54,7 +52,6 @@ class ModelService : _ModelService {
             if (!actionBack.isSuccessBack) throw Exception("服务端关闭模型失败！${actionBack.reason}")
             true
         } catch (e: Exception) {
-            e.printStackTrace()
             log.error("关闭模型失败！", e)
             false
         }
@@ -77,7 +74,6 @@ class ModelService : _ModelService {
         return try {
             modelClient.getModelPrx().consumeAbility(modelGuid)
         } catch (e: Exception) {
-            e.printStackTrace()
             log.error("查询可用资源失败！", e)
             -1
         }

@@ -21,9 +21,12 @@ interface _TaskService : _IceInterface {
 
     fun deleteTask(taskGuid: String): Boolean
 
+    fun updateTaskInfo(taskGuid: String): TaskEntity?
+
     fun queryTaskInfo(taskGuid: String): TaskInfo?
 
     fun queryTaskProcess(taskGuid: String): TaskProcessInfo?
+
 
     fun getUploadDir(taskGuid: String): PathInfo?
 

@@ -139,6 +139,23 @@ class TaskService : _TaskService {
         }
     }
 
+    override fun updateTaskInfo(taskGuid: String): TaskEntity? {
+        return try {
+            //检查数据库中是否存在这条任务记录
+            val task = taskDao.queryFirst(taskGuid) ?: throw Exception("数据库中不存在此任务！")
+            //查询服务端任务信息
+            val taskInto = taskClient.getTaskPrx().query(taskGuid)
+            task.state = taskInto.state
+            task.modelGuid = taskInto.modelGuid
+            task.modelName = taskInto.modelName
+            taskDao.save(task)
+            task
+        } catch (e: Exception) {
+            log.error("更新任务失败！", e)
+            null
+        }
+    }
+
     override fun queryTaskInfo(taskGuid: String): TaskInfo? {
         return try {
             //检查数据库中是否存在这条任务记录

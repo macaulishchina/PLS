@@ -202,7 +202,7 @@ class SFTPKits(private val username: String, private val host: String, private v
     }
 
     override fun ls(dir: String): Array<String> {
-        if (!cd(dir)) return arrayOf()
+        if (!cd(dir)) return emptyArray()
         return list(Filter.ALL)
     }
 
@@ -211,7 +211,7 @@ class SFTPKits(private val username: String, private val host: String, private v
     }
 
     override fun lsFiles(dir: String): Array<String> {
-        if (!cd(dir)) return arrayOf()
+        if (!cd(dir)) return emptyArray()
         return list(Filter.FILE)
     }
 
@@ -220,7 +220,7 @@ class SFTPKits(private val username: String, private val host: String, private v
     }
 
     override fun lsDirs(dir: String): Array<String> {
-        if (!cd(dir)) return arrayOf()
+        if (!cd(dir)) return emptyArray()
         return list(Filter.DIR)
     }
 
@@ -348,7 +348,7 @@ class SFTPKits(private val username: String, private val host: String, private v
             list = sftp.ls(sftp.pwd()) as Vector<ChannelSftp.LsEntry>
         } catch (e: SftpException) {
             log.error("can not list directory", e)
-            return arrayOf()
+            return emptyArray()
         }
 
         val resultList = ArrayList<String>()

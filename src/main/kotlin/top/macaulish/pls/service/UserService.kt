@@ -1,5 +1,6 @@
 package top.macaulish.pls.service
 
+import netscape.security.Privilege
 import org.apache.log4j.Logger
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -61,5 +62,22 @@ class UserService : _UserService {
                 9 -> _UserService.Privilege.ADMIN       //系统管理员：拥有系统所有权限
             else -> _UserService.Privilege.ILLEGAL    //未定义身份:不能登入，没有任务操作权限
             }
+    }
+
+    fun isLegalUser(user: UserEntity): Boolean {
+        return when (getPrivilege(user.privilege)) {
+            _UserService.Privilege.USER,
+            _UserService.Privilege.SUPERUSER,
+            _UserService.Privilege.ADMIN -> true
+            else -> false
+        }
+    }
+
+    fun isSuperUser(user: UserEntity): Boolean {
+        return when (getPrivilege(user.privilege)) {
+            _UserService.Privilege.SUPERUSER,
+            _UserService.Privilege.ADMIN -> true
+            else -> false
+        }
     }
 }

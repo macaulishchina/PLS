@@ -6,7 +6,7 @@ import top.macaulish.pls.service._IceInterface
 
 interface _ModelService : _IceInterface {
 
-    fun queryAllModels(): Array<ModelInfo>?
+    fun queryAllModels(): Array<ModelInfo>
 
     fun queryModel(modelGuid: String): ModelInfo?
 

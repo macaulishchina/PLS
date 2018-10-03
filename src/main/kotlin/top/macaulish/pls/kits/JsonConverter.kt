@@ -13,7 +13,6 @@ object JsonConverter {
         return try {
             gson.fromJson(actionBack, ActionResultEntity::class.java)
         } catch (e: Exception) {
-            e.printStackTrace()
             log.error("Fail to convert from string $actionBack to Object ActionResultEntity", e)
             throw JsonConverterException(e)
         }
@@ -23,7 +22,6 @@ object JsonConverter {
         return try {
             gson.fromJson(taskInfo, TaskInfoEntity::class.java)
         } catch (e: Exception) {
-            e.printStackTrace()
             log.error("Fail to convert from string $taskInfo to Object ActionResultEntity", e)
             throw JsonConverterException(e)
         }
@@ -33,7 +31,6 @@ object JsonConverter {
         return try {
             gson.fromJson(taskProgress, TaskProcessEntity::class.java)
         } catch (e: Exception) {
-            e.printStackTrace()
             log.error("Fail to convert from string $taskProgress to Object ActionResultEntity", e)
             throw JsonConverterException(e)
         }
@@ -43,7 +40,6 @@ object JsonConverter {
         return try {
             gson.fromJson(taskPath, PathEntity::class.java)
         } catch (e: Exception) {
-            e.printStackTrace()
             log.error("Fail to convert from string $taskPath to Object ActionResultEntity", e)
             throw JsonConverterException(e)
         }
@@ -53,7 +49,6 @@ object JsonConverter {
         return try {
             gson.fromJson(ftpInfo, FTPEntity::class.java)
         } catch (e: Exception) {
-            e.printStackTrace()
             log.error("Fail to convert from string $ftpInfo to Object ActionResultEntity", e)
             throw JsonConverterException(e)
         }

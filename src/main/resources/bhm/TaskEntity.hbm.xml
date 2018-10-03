@@ -18,7 +18,7 @@
             <column name="task_type" sql-type="varchar(20)" length="20"/>
         </property>
         <property name="publish">
-            <column name="publish" sql-type="int(11)"/>
+            <column name="publish" sql-type="int(11)" not-null="true"/>
         </property>
         <property name="state">
             <column name="state" sql-type="varchar(20)" length="20"/>

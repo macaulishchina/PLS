@@ -88,4 +88,12 @@ class UserDao :_userDao {
         val users = db.findByExample(ex)
         return if (users.isEmpty()) null else users[0]
     }
+
+    @Transactional(readOnly = true)
+    fun queryFirstByUsername(username: String): UserEntity? {
+        val ex = UserEntity()
+        ex.username = username
+        val users = db.findByExample(ex)
+        return if (users.isEmpty()) null else users[0]
+    }
 }

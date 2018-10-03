@@ -20,4 +20,5 @@ interface _userDao{
     fun queryByExample(user: UserEntity):List<UserEntity>
 
     fun queryFirst(userGuid: String): UserEntity?
+
 }

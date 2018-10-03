@@ -5,14 +5,14 @@ import java.util.Objects;
 
 /**
  * @author huyidong
- * @date 2018/10/1
+ * @date 2018/10/3
  */
 public class TaskEntity {
     private int id;
     private String guid;
     private String taskName;
     private String taskType;
-    private int publish;
+    private Integer publish;
     private String state;
     private String modelGuid;
     private String modelName;
@@ -55,11 +55,11 @@ public class TaskEntity {
         this.taskType = taskType;
     }
 
-    public int getPublish() {
+    public Integer getPublish() {
         return publish;
     }
 
-    public void setPublish(int publish) {
+    public void setPublish(Integer publish) {
         this.publish = publish;
     }
 
@@ -141,10 +141,10 @@ public class TaskEntity {
         if (o == null || getClass() != o.getClass()) return false;
         TaskEntity that = (TaskEntity) o;
         return id == that.id &&
-                publish == that.publish &&
                 Objects.equals(guid, that.guid) &&
                 Objects.equals(taskName, that.taskName) &&
                 Objects.equals(taskType, that.taskType) &&
+                Objects.equals(publish, that.publish) &&
                 Objects.equals(state, that.state) &&
                 Objects.equals(modelGuid, that.modelGuid) &&
                 Objects.equals(modelName, that.modelName) &&

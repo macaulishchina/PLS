@@ -1,12 +1,11 @@
 package top.macaulish.pls.rest
 
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import top.macaulish.pls.dao.UserDao
-import top.macaulish.pls.kits.JsonResponse
+import top.macaulish.pls.kits.JsonResponse as jr
 import top.macaulish.pls.pojo.db.UserEntity
 import top.macaulish.pls.service.UserService
 import javax.servlet.http.HttpServletRequest
@@ -19,7 +18,7 @@ import javax.servlet.http.HttpServletRequest
 @RequestMapping(path = ["/user"], produces = ["application/json;charset=UTF-8"])
 class UserRest {
 
-    @Autowired
+    @Autowired(required = false)
     lateinit var request: HttpServletRequest
     @Autowired
     lateinit var userService: UserService
@@ -32,11 +31,11 @@ class UserRest {
         user.username = username
         user.password = password
         if (userService.register(user)) {
-            user = userDao.queryFirstByExample(user) ?: return JsonResponse.fail("register successfully,but fail to save the register information")
+            user = userDao.queryFirstByExample(user) ?: return jr.fail("register successfully,but fail to save the register information")
             request.getSession(true).setAttribute("user", user)
-            return JsonResponse.success("$username register successfully")
+            return jr.success("$username register successfully")
         } else {
-            return JsonResponse.fail("fail to register with username $username")
+            return jr.fail("fail to register with username $username")
         }
     }
 
@@ -45,11 +44,11 @@ class UserRest {
         if (userService.login(username, password)) {
             var user = UserEntity()
             user.username = username
-            user = userDao.queryFirstByExample(user) ?: return JsonResponse.fail("login successfully,but fail to get the information from database")
+            user = userDao.queryFirstByExample(user) ?: return jr.fail("login successfully,but fail to get the information from database")
             request.getSession(true).setAttribute("user", user)
-            return JsonResponse.success("login successfully")
+            return jr.success("login successfully")
         } else {
-            return JsonResponse.fail("fail to login with username $username")
+            return jr.fail("fail to login with username $username")
         }
     }
 
@@ -60,14 +59,10 @@ class UserRest {
                 throw Exception("user information doesn't exist in the session")
             }
             request.session.removeAttribute("user")
-            JsonResponse.success("logout successfully")
+            jr.success("logout successfully")
         } catch (e: Exception) {
-            JsonResponse.fail("fail to logout")
+            jr.fail("fail to logout")
         }
     }
 
-    @GetMapping(path = ["/currentUser"])
-    fun getSessionUser(): String {
-        return JsonResponse.success(request.session.getAttribute("user"))
-    }
 }

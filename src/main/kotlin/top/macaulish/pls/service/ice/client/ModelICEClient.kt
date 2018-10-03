@@ -26,7 +26,7 @@ class ModelICEClient {
                 return ModelPrx.checkedCast(base) ?: throw Exception("Invalid proxy!")
             }
         } catch (e: Exception) {
-            log.error("Fail to connect to ice server @$iceHost:$icePort of identified string $proxyIdentify")
+            log.error("Fail to connect to ice server @$iceHost:$icePort of identified string $proxyIdentify", e)
             throw e
         }
     }
