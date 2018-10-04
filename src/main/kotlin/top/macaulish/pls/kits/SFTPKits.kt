@@ -243,7 +243,6 @@ class SFTPKits(private val username: String, private val host: String, private v
     override fun upload(dir: String, saveFile: String, input: InputStream): Boolean {
         val currentDir: String = pwd()
         if (!cd(dir)) return false
-
         return try {
             sftp.put(input, saveFile, ChannelSftp.OVERWRITE)
             if (!existFile(saveFile)) {

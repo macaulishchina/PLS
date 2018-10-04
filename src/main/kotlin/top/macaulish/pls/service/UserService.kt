@@ -80,4 +80,11 @@ class UserService : _UserService {
             else -> false
         }
     }
+
+    fun isAdministrater(user: UserEntity): Boolean {
+        return when (getPrivilege(user.privilege)) {
+            _UserService.Privilege.ADMIN -> true
+            else -> false
+        }
+    }
 }
