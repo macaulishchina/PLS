@@ -29,13 +29,13 @@ class TaskService : _TaskService {
 
     override fun createTask(task: TaskEntity): Boolean {
         try {
-            if (task.modelGuid == null || task.userGuid == null || task.taskName == null || task.taskType == null ||
-                    task.modelGuid.isBlank() || task.userGuid.isBlank() || task.taskName.isBlank() || task.taskType.isBlank())
+            if (task.modelGuid == null || task.userGuid == null || task.taskName == null || task.sourceType == null ||
+                    task.modelGuid.isBlank() || task.userGuid.isBlank() || task.taskName.isBlank() || task.sourceType.isBlank())
                 throw Exception("任务创建缺少必要的信息！")
             val taskServer = taskClient.getTaskPrx()
             task.guid = UUID.randomUUID().toString()
             //服务端尝试创建任务
-            val actionBack = taskServer.create(task.modelGuid, task.guid, task.taskType)
+            val actionBack = taskServer.create(task.modelGuid, task.guid, task.sourceType, task.resultType)
             if (!actionBack.isSuccessBack) throw Exception("服务端创建任务失败！${actionBack.reason}")
             //else:服务端任务创建成功
             task.createTime = Timestamp(System.currentTimeMillis())

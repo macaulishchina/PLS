@@ -9,6 +9,11 @@ object JsonConverter {
     private val log = Logger.getLogger(JsonConverter::class.java)
     private val gson = Gson()
 
+    fun fromPojo(any: Any): String {
+        return gson.toJson(any)
+    }
+
+
     fun fromActionBack(actionBack: String): ActionResultEntity {
         return try {
             gson.fromJson(actionBack, ActionResultEntity::class.java)
@@ -55,9 +60,7 @@ object JsonConverter {
     }
 
     class JsonConverterException : Exception {
-
         constructor() : super("Fail to convert from string to object!")
-
         constructor(cause: Throwable) : super("Fail to convert from string to object!", cause)
     }
 }

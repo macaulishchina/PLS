@@ -1,29 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="hibernate.cfg.xml/Hibernate" uuid="86c7771c-1e50-4ba2-a8ef-eb4be99d356d">
-      <driver-ref>mysql</driver-ref>
-      <synchronize>true</synchronize>
-      <imported>true</imported>
-      <remarks>$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml</remarks>
-      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://address=(protocol=tcp)(host=localhost)(port=3306)/pls</jdbc-url>
-      <driver-properties>
-        <property name="autoReconnect" value="true" />
-        <property name="zeroDateTimeBehavior" value="convertToNull" />
-        <property name="tinyInt1isBit" value="false" />
-        <property name="characterEncoding" value="utf8" />
-        <property name="characterSetResults" value="utf8" />
-        <property name="yearIsDateType" value="false" />
-      </driver-properties>
-    </data-source>
-    <data-source source="LOCAL" name="dataSource" uuid="99a5602e-ede1-4fa0-9e28-d98c63bbfb1f">
-      <imported>true</imported>
-      <remarks>$PROJECT_DIR$/src/main/resources/configs/spring-base.xml</remarks>
-      <jdbc-driver>#{db.jdbc_driverClassName}</jdbc-driver>
-      <jdbc-url>#{db.jdbc_url}</jdbc-url>
-    </data-source>
-    <data-source source="LOCAL" name="configs:hibernate.cfg.xml/Hibernate" uuid="43d53136-a8f1-4305-b7c0-30209b883fd0">
+    <data-source source="LOCAL" name="configs:hibernate.cfg.xml/Hibernate" uuid="de339b8a-d35a-4506-8fe4-08f81019e7e9">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
       <imported>true</imported>

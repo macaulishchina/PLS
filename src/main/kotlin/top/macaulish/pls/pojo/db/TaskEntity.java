@@ -5,13 +5,14 @@ import java.util.Objects;
 
 /**
  * @author huyidong
- * @date 2018/10/3
+ * @date 2018/10/4
  */
 public class TaskEntity {
     private int id;
     private String guid;
     private String taskName;
-    private String taskType;
+    private String sourceType;
+    private String resultType;
     private Integer publish;
     private String state;
     private String modelGuid;
@@ -47,12 +48,20 @@ public class TaskEntity {
         this.taskName = taskName;
     }
 
-    public String getTaskType() {
-        return taskType;
+    public String getSourceType() {
+        return sourceType;
     }
 
-    public void setTaskType(String taskType) {
-        this.taskType = taskType;
+    public void setSourceType(String sourceType) {
+        this.sourceType = sourceType;
+    }
+
+    public String getResultType() {
+        return resultType;
+    }
+
+    public void setResultType(String resultType) {
+        this.resultType = resultType;
     }
 
     public Integer getPublish() {
@@ -143,7 +152,8 @@ public class TaskEntity {
         return id == that.id &&
                 Objects.equals(guid, that.guid) &&
                 Objects.equals(taskName, that.taskName) &&
-                Objects.equals(taskType, that.taskType) &&
+                Objects.equals(sourceType, that.sourceType) &&
+                Objects.equals(resultType, that.resultType) &&
                 Objects.equals(publish, that.publish) &&
                 Objects.equals(state, that.state) &&
                 Objects.equals(modelGuid, that.modelGuid) &&
@@ -159,6 +169,6 @@ public class TaskEntity {
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, guid, taskName, taskType, publish, state, modelGuid, modelName, userGuid, createTime, savePath, saveHost, taskSize, taskNumber);
+        return Objects.hash(id, guid, taskName, sourceType, resultType, publish, state, modelGuid, modelName, userGuid, createTime, savePath, saveHost, taskSize, taskNumber);
     }
 }

@@ -1,5 +1,6 @@
 package top.macaulish.pls.rest
 
+import org.apache.log4j.Logger
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletRequest
 @RequestMapping(path = ["/user"], produces = ["application/json;charset=UTF-8"])
 class UserRest {
 
+    private val log = Logger.getLogger(UserRest::class.java)
     @Autowired(required = false)
     lateinit var request: HttpServletRequest
     @Autowired
@@ -27,28 +29,39 @@ class UserRest {
 
     @PostMapping(path = ["/register"])
     fun register(username: String, password: String): String {
-        var user = UserEntity()
-        user.username = username
-        user.password = password
-        if (userService.register(user)) {
-            user = userDao.queryFirstByExample(user) ?: return jr.fail("register successfully,but fail to save the register information")
-            request.getSession(true).setAttribute("user", user)
-            return jr.success("$username register successfully")
-        } else {
-            return jr.fail("fail to register with username $username")
+        return try {
+            var user = UserEntity()
+            user.username = username
+            user.password = password
+            if (userService.register(user)) {
+                user = userDao.queryFirstByExample(user) ?: return jr.fail("register successfully,but fail to save the register information")
+                request.session.setAttribute("user", user)
+                jr.success("$username register successfully")
+            } else {
+                jr.fail("fail to register with username $username")
+            }
+        } catch (e: Exception) {
+            log.error("fail to register", e)
+            jr.fail("internal error")
         }
     }
 
     @PostMapping(path = ["/login"])
     fun login(username: String, password: String): String {
-        if (userService.login(username, password)) {
-            var user = UserEntity()
-            user.username = username
-            user = userDao.queryFirstByExample(user) ?: return jr.fail("login successfully,but fail to get the information from database")
-            request.getSession(true).setAttribute("user", user)
-            return jr.success("login successfully")
-        } else {
-            return jr.fail("fail to login with username $username")
+        log.debug("#######$username  : $password")
+        return try {
+            if (userService.login(username, password)) {
+                var user = UserEntity()
+                user.username = username
+                user = userDao.queryFirstByExample(user) ?: return jr.fail("login successfully,but fail to get the information from database")
+                request.session.setAttribute("user", user)
+                jr.success("login successfully")
+            } else {
+                jr.fail("fail to login with username $username")
+            }
+        } catch (e: Exception) {
+            log.error("fail to login", e)
+            jr.fail("internal error")
         }
     }
 

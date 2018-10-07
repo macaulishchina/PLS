@@ -126,7 +126,7 @@ class TaskRest {
     }
 
     @PostMapping(path = ["/{username}/create"])
-    fun createTask(@PathVariable username: String, @RequestParam taskName: String, @RequestParam modelGuid: String, @RequestParam taskType: String): String {
+    fun createTask(@PathVariable username: String, @RequestParam taskName: String, @RequestParam modelGuid: String, @RequestParam sourceType: String, @RequestParam resultType: String): String {
         return try {
             val user = userDao.queryFirstByUsername(username)
             if (user == null || !userService.isLegalUser(user)) {
@@ -136,7 +136,8 @@ class TaskRest {
                 task.userGuid = user.guid
                 task.taskName = taskName
                 task.modelGuid = modelGuid
-                task.taskType = taskType
+                task.sourceType = sourceType
+                task.resultType = resultType
                 task.state = "new"
                 taskService.createTask(task).let { if (it) jr.success(task) else jr.fail("fail to create task") }
             }
@@ -259,7 +260,7 @@ class TaskRest {
         }
     }
 
-    @GetMapping(path = ["/{username}/download/{taskGuid}"], produces = ["application/octet-stream"])
+    @GetMapping(path = ["/{username}/download/result/{taskGuid}"], produces = ["application/octet-stream"])
     fun downloadResult(@PathVariable username: String, @PathVariable taskGuid: String): ResponseEntity<ByteArray> {
         return try {
             val user = userDao.queryFirstByUsername(username)
@@ -286,7 +287,7 @@ class TaskRest {
         }
     }
 
-    @GetMapping(path = ["/{username}/download/{taskGuid}"], produces = ["application/octet-stream"])
+    @GetMapping(path = ["/{username}/download/source/{taskGuid}"], produces = ["application/octet-stream"])
     fun downloadSource(): ResponseEntity<ByteArray> {
         return ResponseEntity(HttpStatus.NO_CONTENT)
     }

@@ -14,7 +14,7 @@ import org.springframework.web.servlet.DispatcherServlet
 class SpringBoot : WebApplicationInitializer {
     private val log = Logger.getLogger(SpringBoot::class.java)
     override fun onStartup(servletContext: ServletContext) {
-        log.info("Spring boot -> onStartup called!!!!!!!!!!!!!!!!!!@")
+        log.info("Spring boot -> onStartup called!")
         val ctx = AnnotationConfigWebApplicationContext()
         ctx.register(SpringBaseConfig::class.java, SpringMVCConfig::class.java)
         ctx.servletContext = servletContext

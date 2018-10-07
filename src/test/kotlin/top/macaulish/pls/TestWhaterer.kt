@@ -6,6 +6,7 @@ import org.junit.Test
 import top.macaulish.pls.kits.FileKits
 import top.macaulish.pls.pojo.json.ActionResultEntity
 import java.net.InetAddress
+import java.util.*
 
 class TestWhaterer {
 
@@ -72,9 +73,11 @@ class TestWhaterer {
     }
 
     @Test
-    fun testEnum() {
-        //print(Privilege.valueOf())
+    fun testRandom() {
+
+        log.debug(Random().nextInt(1))
 
     }
+
 
 }

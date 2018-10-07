@@ -24,33 +24,34 @@ import top.macaulish.pls.pojo.ice.*;
 
 public interface TaskPrx extends com.zeroc.Ice.ObjectPrx
 {
-    default ActionBack create(String modelGuid, String taskGuid, String taskType)
+    default ActionBack create(String modelGuid, String sourceType, String taskType, String resultType)
     {
-        return create(modelGuid, taskGuid, taskType, com.zeroc.Ice.ObjectPrx.noExplicitContext);
+        return create(modelGuid, sourceType, taskType, resultType, com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default ActionBack create(String modelGuid, String taskGuid, String taskType, java.util.Map<String, String> context)
+    default ActionBack create(String modelGuid, String sourceType, String taskType, String resultType, java.util.Map<String, String> context)
     {
-        return _iceI_createAsync(modelGuid, taskGuid, taskType, context, true).waitForResponse();
+        return _iceI_createAsync(modelGuid, sourceType, taskType, resultType, context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<ActionBack> createAsync(String modelGuid, String taskGuid, String taskType)
+    default java.util.concurrent.CompletableFuture<ActionBack> createAsync(String modelGuid, String sourceType, String taskType, String resultType)
     {
-        return _iceI_createAsync(modelGuid, taskGuid, taskType, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
+        return _iceI_createAsync(modelGuid, sourceType, taskType, resultType, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<ActionBack> createAsync(String modelGuid, String taskGuid, String taskType, java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<ActionBack> createAsync(String modelGuid, String sourceType, String taskType, String resultType, java.util.Map<String, String> context)
     {
-        return _iceI_createAsync(modelGuid, taskGuid, taskType, context, false);
+        return _iceI_createAsync(modelGuid, sourceType, taskType, resultType, context, false);
     }
 
-    default com.zeroc.IceInternal.OutgoingAsync<ActionBack> _iceI_createAsync(String iceP_modelGuid, String iceP_taskGuid, String iceP_taskType, java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<ActionBack> _iceI_createAsync(String iceP_modelGuid, String iceP_sourceType, String iceP_taskType, String iceP_resultType, java.util.Map<String, String> context, boolean sync)
     {
         com.zeroc.IceInternal.OutgoingAsync<ActionBack> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "create", null, sync, null);
         f.invoke(true, context, null, ostr -> {
                      ostr.writeString(iceP_modelGuid);
-                     ostr.writeString(iceP_taskGuid);
+            ostr.writeString(iceP_sourceType);
             ostr.writeString(iceP_taskType);
+            ostr.writeString(iceP_resultType);
                  }, istr -> {
             ActionBack ret;
             ret = ActionBack.ice_read(istr);

@@ -1,10 +1,13 @@
 package top.macaulish.pls.view
 
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.ResponseBody
+import java.util.*
 import top.macaulish.pls.kits.JsonResponse as jr
 
 /**
@@ -14,10 +17,21 @@ import top.macaulish.pls.kits.JsonResponse as jr
 @Controller
 class HelloController {
 
+
     @GetMapping(path = ["/hi"])
     @ResponseBody
     fun test(): String {
         return "Hello"
+    }
+
+    @GetMapping(path = ["/404"])
+    fun test404(): String {
+        return UUID.randomUUID().toString()
+    }
+
+    @GetMapping(path = ["/500"])
+    fun test500(): ResponseEntity<ByteArray> {
+        throw Exception()
     }
 
 

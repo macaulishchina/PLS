@@ -20,7 +20,6 @@
 
 package top.macaulish.pls.service.ice.client;
 
-import top.macaulish.pls.pojo.ice.ActionBack;
 import top.macaulish.pls.pojo.ice.ModelInfo;
 import top.macaulish.pls.pojo.ice.ModelsInfoHelper;
 
@@ -85,105 +84,6 @@ public interface ModelPrx extends com.zeroc.Ice.ObjectPrx
                  }, istr -> {
             ModelInfo ret;
             ret = ModelInfo.ice_read(istr);
-                     return ret;
-                 });
-        return f;
-    }
-
-    default ActionBack startup(String modelGuid)
-    {
-        return startup(modelGuid, com.zeroc.Ice.ObjectPrx.noExplicitContext);
-    }
-
-    default ActionBack startup(String modelGuid, java.util.Map<String, String> context)
-    {
-        return _iceI_startupAsync(modelGuid, context, true).waitForResponse();
-    }
-
-    default java.util.concurrent.CompletableFuture<ActionBack> startupAsync(String modelGuid)
-    {
-        return _iceI_startupAsync(modelGuid, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
-    }
-
-    default java.util.concurrent.CompletableFuture<ActionBack> startupAsync(String modelGuid, java.util.Map<String, String> context)
-    {
-        return _iceI_startupAsync(modelGuid, context, false);
-    }
-
-    default com.zeroc.IceInternal.OutgoingAsync<ActionBack> _iceI_startupAsync(String iceP_modelGuid, java.util.Map<String, String> context, boolean sync)
-    {
-        com.zeroc.IceInternal.OutgoingAsync<ActionBack> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "startup", null, sync, null);
-        f.invoke(true, context, null, ostr -> {
-                     ostr.writeString(iceP_modelGuid);
-                 }, istr -> {
-            ActionBack ret;
-            ret = ActionBack.ice_read(istr);
-                     return ret;
-                 });
-        return f;
-    }
-
-    default ActionBack shutdown(String modelGuid)
-    {
-        return shutdown(modelGuid, com.zeroc.Ice.ObjectPrx.noExplicitContext);
-    }
-
-    default ActionBack shutdown(String modelGuid, java.util.Map<String, String> context)
-    {
-        return _iceI_shutdownAsync(modelGuid, context, true).waitForResponse();
-    }
-
-    default java.util.concurrent.CompletableFuture<ActionBack> shutdownAsync(String modelGuid)
-    {
-        return _iceI_shutdownAsync(modelGuid, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
-    }
-
-    default java.util.concurrent.CompletableFuture<ActionBack> shutdownAsync(String modelGuid, java.util.Map<String, String> context)
-    {
-        return _iceI_shutdownAsync(modelGuid, context, false);
-    }
-
-    default com.zeroc.IceInternal.OutgoingAsync<ActionBack> _iceI_shutdownAsync(String iceP_modelGuid, java.util.Map<String, String> context, boolean sync)
-    {
-        com.zeroc.IceInternal.OutgoingAsync<ActionBack> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "shutdown", null, sync, null);
-        f.invoke(true, context, null, ostr -> {
-                     ostr.writeString(iceP_modelGuid);
-                 }, istr -> {
-            ActionBack ret;
-            ret = ActionBack.ice_read(istr);
-                     return ret;
-                 });
-        return f;
-    }
-
-    default ActionBack reStartup(String modelGuid)
-    {
-        return reStartup(modelGuid, com.zeroc.Ice.ObjectPrx.noExplicitContext);
-    }
-
-    default ActionBack reStartup(String modelGuid, java.util.Map<String, String> context)
-    {
-        return _iceI_reStartupAsync(modelGuid, context, true).waitForResponse();
-    }
-
-    default java.util.concurrent.CompletableFuture<ActionBack> reStartupAsync(String modelGuid)
-    {
-        return _iceI_reStartupAsync(modelGuid, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
-    }
-
-    default java.util.concurrent.CompletableFuture<ActionBack> reStartupAsync(String modelGuid, java.util.Map<String, String> context)
-    {
-        return _iceI_reStartupAsync(modelGuid, context, false);
-    }
-
-    default com.zeroc.IceInternal.OutgoingAsync<ActionBack> _iceI_reStartupAsync(String iceP_modelGuid, java.util.Map<String, String> context, boolean sync)
-    {
-        com.zeroc.IceInternal.OutgoingAsync<ActionBack> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "reStartup", null, sync, null);
-        f.invoke(true, context, null, ostr -> {
-                     ostr.writeString(iceP_modelGuid);
-                 }, istr -> {
-            ActionBack ret;
-            ret = ActionBack.ice_read(istr);
                      return ret;
                  });
         return f;

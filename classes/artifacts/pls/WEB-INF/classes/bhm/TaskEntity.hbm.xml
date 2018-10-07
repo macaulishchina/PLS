@@ -14,8 +14,11 @@
         <property name="taskName">
             <column name="task_name" sql-type="varchar(50)" length="50"/>
         </property>
-        <property name="taskType">
-            <column name="task_type" sql-type="varchar(20)" length="20"/>
+        <property name="sourceType">
+            <column name="source_type" sql-type="varchar(20)" length="20"/>
+        </property>
+        <property name="resultType">
+            <column name="result_type" sql-type="varchar(20)" length="20"/>
         </property>
         <property name="publish">
             <column name="publish" sql-type="int(11)" not-null="true"/>

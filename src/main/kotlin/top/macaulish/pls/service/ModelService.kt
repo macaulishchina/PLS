@@ -33,41 +33,15 @@ class ModelService : _ModelService {
     }
 
     override fun startUpModel(modelGuid: String): Boolean {
-        return try {
-            //服务端尝试启动模型
-            val actionBack = modelClient.getModelPrx().startup(modelGuid)
-            if (!actionBack.isSuccessBack) throw Exception("服务端模型启动失败！${actionBack.reason}")
-            true
-        } catch (e: Exception) {
-            e.printStackTrace()
-            log.error("模型启动失败！", e)
-            false
-        }
+        TODO()
     }
 
     override fun shutdownModel(modelGuid: String): Boolean {
-        return try {
-            //服务端尝试关闭模型
-            val actionBack = modelClient.getModelPrx().shutdown(modelGuid)
-            if (!actionBack.isSuccessBack) throw Exception("服务端关闭模型失败！${actionBack.reason}")
-            true
-        } catch (e: Exception) {
-            log.error("关闭模型失败！", e)
-            false
-        }
+        TODO()
     }
 
     override fun restartUpModel(modelGuid: String): Boolean {
-        return try {
-            //服务端尝试重启模型
-            val actionBack = modelClient.getModelPrx().reStartup(modelGuid)
-            if (!actionBack.isSuccessBack) throw Exception("服务端重启模型失败！${actionBack.reason}")
-            true
-        } catch (e: Exception) {
-            e.printStackTrace()
-            log.error("重启模型失败！", e)
-            false
-        }
+        TODO()
     }
 
     override fun queryConsumeAbility(modelGuid: String): Int {
