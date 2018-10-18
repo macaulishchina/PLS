@@ -8,9 +8,11 @@ import top.macaulish.pls.pojo.ice.*
  *@date 2018/10/3
  */
 class TaskServerImp : Task {
-    override fun create(modelGuid: String?, taskGuid: String?, taskType: String?, current: Current?): ActionBack {
+
+    override fun create(modelGuid: String?, sourceType: String?, taskType: String?, resultType: String?, current: Current?): ActionBack {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
+
 
     override fun start(taskGuid: String?, current: Current?): ActionBack {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.

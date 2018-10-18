@@ -24,33 +24,33 @@ import top.macaulish.pls.pojo.ice.*;
 
 public interface TaskPrx extends com.zeroc.Ice.ObjectPrx
 {
-    default ActionBack create(String modelGuid, String sourceType, String taskType, String resultType)
+    default ActionBack create(String modelGuid, String taskGuid, String sourceType, String resultType)
     {
-        return create(modelGuid, sourceType, taskType, resultType, com.zeroc.Ice.ObjectPrx.noExplicitContext);
+        return create(modelGuid, taskGuid, sourceType, resultType, com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default ActionBack create(String modelGuid, String sourceType, String taskType, String resultType, java.util.Map<String, String> context)
+    default ActionBack create(String modelGuid, String taskGuid, String sourceType, String resultType, java.util.Map<String, String> context)
     {
-        return _iceI_createAsync(modelGuid, sourceType, taskType, resultType, context, true).waitForResponse();
+        return _iceI_createAsync(modelGuid, taskGuid, sourceType, resultType, context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<ActionBack> createAsync(String modelGuid, String sourceType, String taskType, String resultType)
+    default java.util.concurrent.CompletableFuture<ActionBack> createAsync(String modelGuid, String taskGuid, String sourceType, String resultType)
     {
-        return _iceI_createAsync(modelGuid, sourceType, taskType, resultType, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
+        return _iceI_createAsync(modelGuid, taskGuid, sourceType, resultType, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<ActionBack> createAsync(String modelGuid, String sourceType, String taskType, String resultType, java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<ActionBack> createAsync(String modelGuid, String taskGuid, String sourceType, String resultType, java.util.Map<String, String> context)
     {
-        return _iceI_createAsync(modelGuid, sourceType, taskType, resultType, context, false);
+        return _iceI_createAsync(modelGuid, taskGuid, sourceType, resultType, context, false);
     }
 
-    default com.zeroc.IceInternal.OutgoingAsync<ActionBack> _iceI_createAsync(String iceP_modelGuid, String iceP_sourceType, String iceP_taskType, String iceP_resultType, java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<ActionBack> _iceI_createAsync(String iceP_modelGuid, String iceP_taskGuid, String iceP_sourceType, String iceP_resultType, java.util.Map<String, String> context, boolean sync)
     {
         com.zeroc.IceInternal.OutgoingAsync<ActionBack> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "create", null, sync, null);
         f.invoke(true, context, null, ostr -> {
                      ostr.writeString(iceP_modelGuid);
+            ostr.writeString(iceP_taskGuid);
             ostr.writeString(iceP_sourceType);
-            ostr.writeString(iceP_taskType);
             ostr.writeString(iceP_resultType);
                  }, istr -> {
             ActionBack ret;
@@ -356,59 +356,61 @@ public interface TaskPrx extends com.zeroc.Ice.ObjectPrx
         return f;
     }
 
-    default String getDownloadResultZip(String taskGuid)
+    default PathInfo getDownloadResultZip(String taskGuid)
     {
         return getDownloadResultZip(taskGuid, com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default String getDownloadResultZip(String taskGuid, java.util.Map<String, String> context) {
+    default PathInfo getDownloadResultZip(String taskGuid, java.util.Map<String, String> context) {
         return _iceI_getDownloadResultZipAsync(taskGuid, context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<String> getDownloadResultZipAsync(String taskGuid) {
+    default java.util.concurrent.CompletableFuture<PathInfo> getDownloadResultZipAsync(String taskGuid) {
         return _iceI_getDownloadResultZipAsync(taskGuid, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<String> getDownloadResultZipAsync(String taskGuid, java.util.Map<String, String> context) {
+    default java.util.concurrent.CompletableFuture<PathInfo> getDownloadResultZipAsync(String taskGuid, java.util.Map<String, String> context) {
         return _iceI_getDownloadResultZipAsync(taskGuid, context, false);
     }
 
-    default com.zeroc.IceInternal.OutgoingAsync<String> _iceI_getDownloadResultZipAsync(String iceP_taskGuid, java.util.Map<String, String> context, boolean sync) {
-        com.zeroc.IceInternal.OutgoingAsync<String> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "getDownloadResultZip", null, sync, null);
+    default com.zeroc.IceInternal.OutgoingAsync<PathInfo> _iceI_getDownloadResultZipAsync(String iceP_taskGuid, java.util.Map<String, String> context, boolean sync) {
+        com.zeroc.IceInternal.OutgoingAsync<PathInfo> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "getDownloadResultZip", null, sync, null);
         f.invoke(true, context, null, ostr -> {
                      ostr.writeString(iceP_taskGuid);
                  }, istr -> {
-                     String ret;
-                     ret = istr.readString();
+            PathInfo ret;
+            ret = PathInfo.ice_read(istr);
                      return ret;
                  });
         return f;
     }
 
-    default SFTPInfo getFTPInfo()
+    default SFTPInfo getFTPInfo(String taskGuid)
     {
-        return getFTPInfo(com.zeroc.Ice.ObjectPrx.noExplicitContext);
+        return getFTPInfo(taskGuid, com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default SFTPInfo getFTPInfo(java.util.Map<String, String> context)
+    default SFTPInfo getFTPInfo(String taskGuid, java.util.Map<String, String> context)
     {
-        return _iceI_getFTPInfoAsync(context, true).waitForResponse();
+        return _iceI_getFTPInfoAsync(taskGuid, context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<SFTPInfo> getFTPInfoAsync()
+    default java.util.concurrent.CompletableFuture<SFTPInfo> getFTPInfoAsync(String taskGuid)
     {
-        return _iceI_getFTPInfoAsync(com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
+        return _iceI_getFTPInfoAsync(taskGuid, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<SFTPInfo> getFTPInfoAsync(java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<SFTPInfo> getFTPInfoAsync(String taskGuid, java.util.Map<String, String> context)
     {
-        return _iceI_getFTPInfoAsync(context, false);
+        return _iceI_getFTPInfoAsync(taskGuid, context, false);
     }
 
-    default com.zeroc.IceInternal.OutgoingAsync<SFTPInfo> _iceI_getFTPInfoAsync(java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<SFTPInfo> _iceI_getFTPInfoAsync(String iceP_taskGuid, java.util.Map<String, String> context, boolean sync)
     {
         com.zeroc.IceInternal.OutgoingAsync<SFTPInfo> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "getFTPInfo", null, sync, null);
-        f.invoke(true, context, null, null, istr -> {
+        f.invoke(true, context, null, ostr -> {
+            ostr.writeString(iceP_taskGuid);
+        }, istr -> {
             SFTPInfo ret;
             ret = SFTPInfo.ice_read(istr);
                      return ret;

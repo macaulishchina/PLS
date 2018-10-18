@@ -2,6 +2,7 @@ package top.macaulish.pls.service
 
 import org.apache.log4j.Logger
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 import top.macaulish.pls.service.ice.client.ModelICEClient
 import top.macaulish.pls.pojo.ice.ModelInfo
@@ -14,12 +15,19 @@ class ModelService : _ModelService {
     @Autowired
     private lateinit var modelClient: ModelICEClient
 
-    override fun queryAllModels(): Array<ModelInfo> {
+    @Value("#{model.model_source_type}")
+    private lateinit var modelSourceTypes: String
+
+    @Value("#{model.model_result_type}")
+    private lateinit var modelResultTypes: String
+
+
+    override fun queryAllModels(): Array<ModelInfo>? {
         return try {
             modelClient.getModelPrx().queryAll()
         } catch (e: Exception) {
             log.error("查询模型信息失败！", e)
-            emptyArray()
+            null
         }
     }
 
@@ -30,6 +38,14 @@ class ModelService : _ModelService {
             log.error("查询模型信息失败！Guid=$modelGuid", e)
             null
         }
+    }
+
+    override fun getSourceTypes(): Array<String> {
+        return modelSourceTypes.trim().split(',').toTypedArray()
+    }
+
+    override fun getTargetType(): Array<String> {
+        return modelResultTypes.trim().split(',').toTypedArray()
     }
 
     override fun startUpModel(modelGuid: String): Boolean {

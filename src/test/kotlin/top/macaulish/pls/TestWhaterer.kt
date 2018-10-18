@@ -49,19 +49,10 @@ class TestWhaterer {
 
     @Test
     fun testDog() {
-        Dog()
+
     }
 
-    class Dog() {
 
-        init {
-            eat()
-        }
-
-        fun eat() {
-            print("eat")
-        }
-    }
     private class JsonObject(val state:String,var data:Any){
         fun toJsonString():String{
             return Gson().toJson(this)
@@ -77,6 +68,31 @@ class TestWhaterer {
 
         log.debug(Random().nextInt(1))
 
+    }
+
+    class Dog {
+        var name: String = ""
+
+        init {
+            eat()
+        }
+
+        fun eat() {
+            print("eat")
+        }
+    }
+
+    var Dog.gender: String
+        get() = ""
+        set(value) = print(value)
+
+    @Test
+    fun testKotlin() {
+
+        fun Dog.sleep() {
+            print("sleep")
+        }
+        Dog().sleep()
     }
 
 

@@ -10,6 +10,7 @@
 
     <util:properties id="db" location="classpath:configs/db.properties"/>
     <util:properties id="ice" location="classpath:configs/ice.properties"/>
+    <util:properties id="model" location="classpath:configs/model.properties"/>
 
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="#{db.jdbc_driverClassName}"/>

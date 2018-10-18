@@ -7,7 +7,7 @@ import java.io.InputStream
 
 interface _TaskService : _IceInterface {
 
-    fun isLocal(): Boolean
+    fun isLocal(taskGuid: String): Boolean
 
     fun createTask(task: TaskEntity): Boolean
 
@@ -27,12 +27,11 @@ interface _TaskService : _IceInterface {
 
     fun queryTaskProcess(taskGuid: String): TaskProcessInfo?
 
-
     fun getUploadDir(taskGuid: String): PathInfo?
 
     fun getDownloadDir(taskGuid: String): PathInfo?
 
-    fun getFtpInfo(): SFTPInfo?
+    fun getFtpInfo(taskGuid: String): SFTPInfo?
 
     fun uploadFile(inputStream: InputStream, taskGuid: String, saveName: String): Boolean
 

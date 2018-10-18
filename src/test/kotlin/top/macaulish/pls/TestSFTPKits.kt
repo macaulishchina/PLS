@@ -73,6 +73,15 @@ class TestSFTPKits {
         println(ftp.pwd())
     }
 
+    @Test
+    fun testListFiles() {
+        var files = ftp.lsFiles()
+        println(ftp.pwd())
+        for (file in files) {
+            println(file)
+        }
+    }
+
     @After
     fun logout() {
         ftp.logout()

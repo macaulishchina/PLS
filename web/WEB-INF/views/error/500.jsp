@@ -19,7 +19,7 @@
     <link href="<c:url value="/static/css/login.css"/>" rel="stylesheet"/>
 
     <link rel="icon" href="<c:url value="/static/image/duola-a-meng/duola-a-meng_67.png"/>">
-    <title>500</title>
+    <title>PLS</title>
 </head>
 <body class="text-center">
 <form class="form-login">

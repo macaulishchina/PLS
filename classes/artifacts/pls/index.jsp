@@ -11,6 +11,6 @@
     <title>Welcome</title>
 </head>
 <body>
-    <% response.sendRedirect("/welcome");%>
+<% response.sendRedirect("/welcome");%>
 </body>
 </html>

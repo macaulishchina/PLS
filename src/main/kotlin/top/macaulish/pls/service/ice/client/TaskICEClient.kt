@@ -20,11 +20,11 @@ class TaskICEClient {
     private lateinit var proxyIdentify: String
 
     fun getTaskPrx(): TaskPrx {
-        try {
-            Util.initialize().use { communicator ->
-                val base = communicator.stringToProxy("$proxyIdentify:default -h $iceHost -p $icePort")
-                return TaskPrx.checkedCast(base) ?: throw Exception("Invalid proxy!")
-            }
+
+        return try {
+            val communicator = Util.initialize()
+            val base = communicator.stringToProxy("$proxyIdentify:default -h $iceHost  -p $icePort")
+            TaskPrx.checkedCast(base) ?: throw Exception("Invalid proxy!")
         } catch (e: Exception) {
             log.error("Fail to connect to ice server @$iceHost:$icePort of identified string $proxyIdentify", e)
             throw e

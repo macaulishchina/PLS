@@ -38,7 +38,7 @@
     <button class="btn btn-lg btn-success btn-block" type="submit">Sign In</button>
     <div class="row mt-2">
         <div class="col">
-            <button class="btn btn-lg btn-secondary btn-block" type="button">Guest</button>
+            <button v-on:click="guestLogin" class="btn btn-lg btn-secondary btn-block" type="button">Guest</button>
         </div>
         <div class="col">
             <button class="btn btn-lg btn-info btn-block" type="button">Register</button>

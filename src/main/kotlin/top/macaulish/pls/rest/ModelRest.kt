@@ -25,17 +25,17 @@ class ModelRest {
 
     @GetMapping(value = ["/query"])
     fun queryAll(): String {
-        return jr.success(modelService.queryAllModels())
+        return modelService.queryAllModels().let { if (it == null) jr.fail("failed to query models") else jr.success(it) }
     }
 
     @GetMapping(value = ["/query/{modelGuid}"])
     fun queryOne(@PathVariable modelGuid: String): String {
-        return jr.success(modelService.queryModel(modelGuid) ?: "")
+        return modelService.queryModel(modelGuid).let { if (it == null) jr.fail("failed to query model") else jr.success(it) }
     }
 
     @GetMapping(value = ["/ability/{modelGuid}"])
     fun queryAbility(@PathVariable modelGuid: String): String {
-        return jr.success(modelService.queryConsumeAbility(modelGuid))
+        return modelService.queryConsumeAbility(modelGuid).let { if (it == -1) jr.fail("failed to query the model") else jr.success(it) }
     }
 
     @PostMapping(value = ["/{username}/startup/{modelGuid}"])

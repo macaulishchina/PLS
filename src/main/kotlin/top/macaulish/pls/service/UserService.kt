@@ -56,7 +56,8 @@ class UserService : _UserService {
 
     override fun getPrivilege(privilege: Int): _UserService.Privilege {
         return when (privilege) {
-                0 -> _UserService.Privilege.BAN         //黑名单用户：不能登入，没有任务操作权限
+            -1 -> _UserService.Privilege.BAN         //黑名单用户：不能登入，没有任务操作权限
+            0 -> _UserService.Privilege.GUEST       //匿名用户
                 1 -> _UserService.Privilege.USER        //一般用户：可以管理自己的任务，只读操作别人的任务
                 2 -> _UserService.Privilege.SUPERUSER   //超级用户：可以管理所有任务
                 9 -> _UserService.Privilege.ADMIN       //系统管理员：拥有系统所有权限

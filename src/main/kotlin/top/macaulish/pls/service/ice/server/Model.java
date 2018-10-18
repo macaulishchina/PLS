@@ -20,7 +20,6 @@
 
 package top.macaulish.pls.service.ice.server;
 
-import top.macaulish.pls.pojo.ice.ActionBack;
 import top.macaulish.pls.pojo.ice.ModelInfo;
 import top.macaulish.pls.pojo.ice.ModelsInfoHelper;
 
@@ -38,10 +37,7 @@ public interface Model extends com.zeroc.Ice.Object {
                     "ice_isA",
                     "ice_ping",
                     "queryAll",
-                    "querySpecific",
-                    "reStartup",
-                    "shutdown",
-                    "startup"
+                    "querySpecific"
             };
 
     static String ice_staticId() {
@@ -71,45 +67,6 @@ public interface Model extends com.zeroc.Ice.Object {
         return inS.setResult(ostr);
     }
 
-    static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_startup(Model obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current) {
-        com.zeroc.Ice.Object._iceCheckMode(null, current.mode);
-        com.zeroc.Ice.InputStream istr = inS.startReadParams();
-        String iceP_modelGuid;
-        iceP_modelGuid = istr.readString();
-        inS.endReadParams();
-        ActionBack ret = obj.startup(iceP_modelGuid, current);
-        com.zeroc.Ice.OutputStream ostr = inS.startWriteParams();
-        ActionBack.ice_write(ostr, ret);
-        inS.endWriteParams(ostr);
-        return inS.setResult(ostr);
-    }
-
-    static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_shutdown(Model obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current) {
-        com.zeroc.Ice.Object._iceCheckMode(null, current.mode);
-        com.zeroc.Ice.InputStream istr = inS.startReadParams();
-        String iceP_modelGuid;
-        iceP_modelGuid = istr.readString();
-        inS.endReadParams();
-        ActionBack ret = obj.shutdown(iceP_modelGuid, current);
-        com.zeroc.Ice.OutputStream ostr = inS.startWriteParams();
-        ActionBack.ice_write(ostr, ret);
-        inS.endWriteParams(ostr);
-        return inS.setResult(ostr);
-    }
-
-    static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_reStartup(Model obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current) {
-        com.zeroc.Ice.Object._iceCheckMode(null, current.mode);
-        com.zeroc.Ice.InputStream istr = inS.startReadParams();
-        String iceP_modelGuid;
-        iceP_modelGuid = istr.readString();
-        inS.endReadParams();
-        ActionBack ret = obj.reStartup(iceP_modelGuid, current);
-        com.zeroc.Ice.OutputStream ostr = inS.startWriteParams();
-        ActionBack.ice_write(ostr, ret);
-        inS.endWriteParams(ostr);
-        return inS.setResult(ostr);
-    }
-
     static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_consumeAbility(Model obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current) {
         com.zeroc.Ice.Object._iceCheckMode(null, current.mode);
         com.zeroc.Ice.InputStream istr = inS.startReadParams();
@@ -126,12 +83,6 @@ public interface Model extends com.zeroc.Ice.Object {
     ModelInfo[] queryAll(com.zeroc.Ice.Current current);
 
     ModelInfo querySpecific(String modelGuid, com.zeroc.Ice.Current current);
-
-    ActionBack startup(String modelGuid, com.zeroc.Ice.Current current);
-
-    ActionBack shutdown(String modelGuid, com.zeroc.Ice.Current current);
-
-    ActionBack reStartup(String modelGuid, com.zeroc.Ice.Current current);
 
     int consumeAbility(String modelGuid, com.zeroc.Ice.Current current);
 
@@ -174,15 +125,6 @@ public interface Model extends com.zeroc.Ice.Object {
             }
             case 6: {
                 return _iceD_querySpecific(this, in, current);
-            }
-            case 7: {
-                return _iceD_reStartup(this, in, current);
-            }
-            case 8: {
-                return _iceD_shutdown(this, in, current);
-            }
-            case 9: {
-                return _iceD_startup(this, in, current);
             }
         }
 

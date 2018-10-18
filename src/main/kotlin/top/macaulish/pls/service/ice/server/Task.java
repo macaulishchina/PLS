@@ -56,13 +56,15 @@ public interface Task extends com.zeroc.Ice.Object {
         com.zeroc.Ice.Object._iceCheckMode(null, current.mode);
         com.zeroc.Ice.InputStream istr = inS.startReadParams();
         String iceP_modelGuid;
-        String iceP_taskGuid;
+        String iceP_sourceType;
         String iceP_taskType;
+        String iceP_resultType;
         iceP_modelGuid = istr.readString();
-        iceP_taskGuid = istr.readString();
+        iceP_sourceType = istr.readString();
         iceP_taskType = istr.readString();
+        iceP_resultType = istr.readString();
         inS.endReadParams();
-        ActionBack ret = obj.create(iceP_modelGuid, iceP_taskGuid, iceP_taskType, current);
+        ActionBack ret = obj.create(iceP_modelGuid, iceP_sourceType, iceP_taskType, iceP_resultType, current);
         com.zeroc.Ice.OutputStream ostr = inS.startWriteParams();
         ActionBack.ice_write(ostr, ret);
         inS.endWriteParams(ostr);
@@ -209,7 +211,7 @@ public interface Task extends com.zeroc.Ice.Object {
         return inS.setResult(ostr);
     }
 
-    ActionBack create(String modelGuid, String taskGuid, String taskType, com.zeroc.Ice.Current current);
+    ActionBack create(String modelGuid, String sourceType, String taskType, String resultType, com.zeroc.Ice.Current current);
 
     ActionBack start(String taskGuid, com.zeroc.Ice.Current current);
 

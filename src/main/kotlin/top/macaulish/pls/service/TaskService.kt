@@ -8,6 +8,7 @@ import top.macaulish.pls.service.ice.client.TaskICEClient
 import top.macaulish.pls.kits.FileKits
 import top.macaulish.pls.kits.SFTPKits
 import top.macaulish.pls.pojo.db.TaskEntity
+import top.macaulish.pls.pojo.extend.FileInfo
 import top.macaulish.pls.pojo.ice.*
 import java.io.*
 import java.net.InetAddress
@@ -39,10 +40,10 @@ class TaskService : _TaskService {
             if (!actionBack.isSuccessBack) throw Exception("服务端创建任务失败！${actionBack.reason}")
             //else:服务端任务创建成功
             task.createTime = Timestamp(System.currentTimeMillis())
-            task.state = "ready"
+            task.state = "new"
             task.modelName = modelService.queryModel(task.modelGuid)?.name ?: "unknown model name"
             task.savePath = getUploadDir(task.guid)?.path ?: "not available"
-            task.saveHost = getFtpInfo()?.host ?: "not available"
+            task.saveHost = getFtpInfo(task.guid)?.host ?: "not available"
             task.taskSize = 0
             task.taskNumber = 0
             //保存任务到数据库
@@ -63,7 +64,7 @@ class TaskService : _TaskService {
             if (!actionBack.isSuccessBack) throw Exception("服务端启动任务失败！${actionBack.reason}")
             //else:任务启动成功
             task.state = "handling"
-            taskDao.save(task)
+            taskDao.saveOrUpdate(task)
             true
         } catch (e: Exception) {
             log.error("启动任务失败！", e)
@@ -80,7 +81,7 @@ class TaskService : _TaskService {
             if (!actionBack.isSuccessBack) throw Exception("服务端暂停任务失败！${actionBack.reason}")
             //else:任务暂停成功
             task.state = "pause"
-            taskDao.save(task)
+            taskDao.saveOrUpdate(task)
             true
         } catch (e: Exception) {
             log.error("暂停任务失败！", e)
@@ -97,7 +98,7 @@ class TaskService : _TaskService {
             if (!actionBack.isSuccessBack) throw Exception("服务端继续任务失败！${actionBack.reason}")
             //else:任务继续成功
             task.state = "handling"
-            taskDao.save(task)
+            taskDao.saveOrUpdate(task)
             true
         } catch (e: Exception) {
             log.error("恢复任务失败！", e)
@@ -114,7 +115,7 @@ class TaskService : _TaskService {
             if (!actionBack.isSuccessBack) throw Exception("服务端终止任务失败！${actionBack.reason}")
             //else:任务终止成功
             task.state = "stop"
-            taskDao.save(task)
+            taskDao.saveOrUpdate(task)
             true
         } catch (e: Exception) {
             log.error("终止任务失败！", e)
@@ -127,11 +128,10 @@ class TaskService : _TaskService {
             //检查数据库中是否存在这条任务记录
             val task = taskDao.queryFirst(taskGuid) ?: throw Exception("数据库中不存在此任务！")
             //服务端尝试删除任务
-            val actionBack = taskClient.getTaskPrx().stop(taskGuid)
+            val actionBack = taskClient.getTaskPrx().delete(taskGuid)
             if (!actionBack.isSuccessBack) throw Exception("服务端删除任务失败！${actionBack.reason}")
             //else:任务删除成功
-            task.state = "delete"
-            taskDao.save(task)
+            taskDao.delete(task)
             true
         } catch (e: Exception) {
             log.error("删除任务失败！", e)
@@ -145,10 +145,14 @@ class TaskService : _TaskService {
             val task = taskDao.queryFirst(taskGuid) ?: throw Exception("数据库中不存在此任务！")
             //查询服务端任务信息
             val taskInto = taskClient.getTaskPrx().query(taskGuid)
-            task.state = taskInto.state
-            task.modelGuid = taskInto.modelGuid
-            task.modelName = taskInto.modelName
-            taskDao.save(task)
+            if (taskInto.guid == taskGuid) {//任务存在，更新任务
+                task.state = taskInto.state
+                task.modelGuid = taskInto.modelGuid
+                task.modelName = taskInto.modelName
+            } else {
+                task.state = "error"
+            }
+            taskDao.saveOrUpdate(task)
             task
         } catch (e: Exception) {
             log.error("更新任务失败！", e)
@@ -161,12 +165,17 @@ class TaskService : _TaskService {
             //检查数据库中是否存在这条任务记录
             val task = taskDao.queryFirst(taskGuid) ?: throw Exception("数据库中不存在此任务！")
             //查询服务端任务信息
-            val taskInto = taskClient.getTaskPrx().query(taskGuid)
-            task.state = taskInto.state
-            task.modelGuid = taskInto.modelGuid
-            task.modelName = taskInto.modelName
-            taskDao.save(task)
-            taskInto
+            val taskInfo = taskClient.getTaskPrx().query(taskGuid)
+            if (taskInfo.guid == taskGuid) {
+                task.state = taskInfo.state
+                task.modelGuid = taskInfo.modelGuid
+                task.modelName = taskInfo.modelName
+                taskDao.saveOrUpdate(task)
+                taskInfo
+            } else {
+                log.debug("模型端不存在此任务")
+                null
+            }
         } catch (e: Exception) {
             log.error("查询任务失败！", e)
             null
@@ -180,7 +189,7 @@ class TaskService : _TaskService {
             //查询服务端任务进程信息
             val processInfo = taskClient.getTaskPrx().getProgress(taskGuid)
             task.state = processInfo.taskState
-            taskDao.save(task)
+            taskDao.saveOrUpdate(task)
             processInfo
         } catch (e: Exception) {
             log.error("查询任务进程失败！", e)
@@ -212,18 +221,18 @@ class TaskService : _TaskService {
         }
     }
 
-    override fun getFtpInfo(): SFTPInfo? {
+    override fun getFtpInfo(taskGuid: String): SFTPInfo? {
         return try {
             //查询服务端ftp连接信息
-            taskClient.getTaskPrx().ftpInfo
+            taskClient.getTaskPrx().getFTPInfo(taskGuid)
         } catch (e: Exception) {
             log.error("获得ftp连接信息失败！", e)
             null
         }
     }
 
-    final override fun isLocal(): Boolean {
-        return InetAddress.getLocalHost().hostAddress == taskClient.getTaskPrx().ftpInfo.host
+    final override fun isLocal(taskGuid: String): Boolean {
+        return InetAddress.getLocalHost().hostAddress == taskClient.getTaskPrx().getFTPInfo(taskGuid).host
     }
 
     override fun uploadFile(inputStream: InputStream, taskGuid: String, saveName: String): Boolean {
@@ -231,10 +240,10 @@ class TaskService : _TaskService {
         return try {
             val taskPrx = taskClient.getTaskPrx()
             val uploadDir = taskPrx.getUploadDir(taskGuid)
-            if (isLocal()) {
+            if (isLocal(taskGuid)) {
                 FileKits.saveFile(inputStream, uploadDir.path, saveName)
             } else {
-                val sftp = taskPrx.ftpInfo
+                val sftp = taskPrx.getFTPInfo(taskGuid)
                 sftpKits = SFTPKits(sftp.host, sftp.username, sftp.password, sftp.port)
                 sftpKits.login()
                 sftpKits.upload(uploadDir.path, saveName, inputStream)
@@ -249,11 +258,17 @@ class TaskService : _TaskService {
 
     override fun downloadResult(taskGuid: String): ByteArray? {
         var sftpKits: SFTPKits? = null
+        var resultPath: String
         return try {
             val taskPrx = taskClient.getTaskPrx()
             val input: FileInputStream
-            val resultPath = taskPrx.getDownloadResultZip(taskGuid)
-            if (isLocal()) {
+            val pathInfo = taskPrx.getDownloadResultZip(taskGuid)
+            if (taskGuid == pathInfo.taskGuid) {
+                resultPath = taskPrx.getDownloadResultZip(taskGuid).path
+            } else {
+                throw Exception("result doesn't exist")
+            }
+            if (isLocal(taskGuid)) {
                 val result = File(resultPath)
                 if (result.exists() && result.isFile) {
                     input = FileInputStream(result)
@@ -263,7 +278,7 @@ class TaskService : _TaskService {
                     null
                 }
             } else {
-                val sftp = taskPrx.ftpInfo
+                val sftp = taskPrx.getFTPInfo(taskGuid)
                 sftpKits = SFTPKits(sftp.host, sftp.username, sftp.password, sftp.port)
                 sftpKits.login()
                 if (sftpKits.existAbsolutelyFile(resultPath)) {
@@ -279,8 +294,41 @@ class TaskService : _TaskService {
             log.error("fail to download file for task $taskGuid", e)
             null
         } finally {
-            sftpKits?.logout()
+            try {
+                sftpKits?.logout()
+            } catch (e: Exception) {
+                throw e
+            }
         }
     }
 
+    fun getUploadFiles(taskGuid: String): ArrayList<FileInfo> {
+        var sftpKits: SFTPKits? = null
+        val fileInfos = ArrayList<FileInfo>()
+        return try {
+            val dir = getUploadDir(taskGuid)
+            val taskPrx = taskClient.getTaskPrx()
+            val sftp = taskPrx.getFTPInfo(taskGuid)
+            sftpKits = SFTPKits(sftp.host, sftp.username, sftp.password, sftp.port)
+            sftpKits.login()
+            val filesNames = sftpKits.lsFiles(dir?.path ?: throw Exception("upload files doesn't exist"))
+            for (name in filesNames) {
+                val fileInfo = FileInfo()
+                fileInfo.name = name
+                fileInfo.path = "$dir/$name"
+                fileInfo.size = "unknown"
+                fileInfos.add(fileInfo)
+            }
+            fileInfos
+        } catch (e: Exception) {
+            log.error(e)
+            throw e
+        } finally {
+            try {
+                sftpKits?.logout()
+            } catch (e: Exception) {
+                throw e
+            }
+        }
+    }
 }
